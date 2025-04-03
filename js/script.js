@@ -1,6 +1,8 @@
 
 document.addEventListener("DOMContentLoaded", function() {
-    AOS.init();
+    AOS.init({
+        duration: 700
+    });
   
     function getNextWeekDate(startDate) {
         let today = new Date();

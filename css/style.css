@@ -107,6 +107,7 @@ body{
     max-width: 700px;
     display: block;
     margin: auto;
+    border-radius: 1em;
 }
 
 .container-bottom .card-title img {
@@ -175,6 +176,21 @@ footer .container a{
     }
 }
 
+@media screen and (max-width: 769px){
+    .container-top .card.flex-grow-1{
+        max-width: none;
+    }
+    .card-title{
+        font-size: 3em !important;
+    }
+    .container-top .card.ms-4{
+        display: none;
+    }
+    .text-cards{
+        top: -100px !important;
+    }
+}
+
 @media (max-width: 576px) {
     .card-title img {
         width: 150px;
@@ -192,16 +208,5 @@ footer .container a{
     .btn-color {
         font-size: 0.9em;
         padding: 8px 12px;
-    }
-}
-@media screen and (max-width: 769px){
-    .container-top .card.flex-grow-1{
-        max-width: none;
-    }
-    .card-title{
-        font-size: 3em !important;
-    }
-    .container-top .card.ms-4{
-        display: none;
     }
 }
