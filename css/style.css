@@ -141,13 +141,18 @@ body{
     transition: 0.2s ease-in-out;
 }
 
+
 .btn-color:hover {
     background: #290801;
     transform: scale(1.05);
 }
 
+footer{
+    color: #3d0c02;
+}
+
 footer .container a{
-    color: black;
+    color: #3d0c02;
 }
 
 @media (max-width: 992px) {

@@ -1,7 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", function() {
     AOS.init({
-        duration: 700
+        duration: 1000
     });
   
     function getNextWeekDate(startDate) {
@@ -33,3 +33,39 @@ document.addEventListener("DOMContentLoaded", function() {
 
     document.getElementById("date").textContent = formatDate(nextDate);
 });
+
+const path = document.querySelector("#wave path");
+let step = 0;
+
+function animateWave() {
+  step += 0.015;
+  const amplitude = 20;
+  const frequency = 0.01;
+
+  const newD = [];
+  for (let x = 0; x <= 1440; x += 60) {
+    const y = 60 + Math.sin(x * frequency + step) * amplitude;
+    newD.push(`${x},${y}`);
+  }
+
+  path.setAttribute("d", `M${newD.join("L")}L1440,160L0,160Z`);
+  requestAnimationFrame(animateWave);
+}
+
+animateWave();
+
+const waveImage = document.getElementById('waveimg');
+let xPosition = 0;
+
+function animateWaveImage() {
+  xPosition += 1;
+  waveImage.style.transform = `translateX(${xPosition}px)`;
+  
+  if (xPosition > 100) { // reset à 0 après 100px
+    xPosition = 0;
+  }
+
+  requestAnimationFrame(animateWaveImage);
+}
+
+animateWaveImage();
