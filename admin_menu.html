@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu dynamique</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans max-w-5xl mx-auto p-6">
+
+  <header class="bg-green-600 text-white p-6 text-center rounded-lg shadow mb-6">
+    <h1 class="text-3xl font-bold">Notre Menu</h1>
+  </header>
+
+  <section class="mb-6">
+    <div class="flex gap-2">
+      <input id="new-category-name" placeholder="Nouvelle catégorie" class="border rounded px-2 flex-1">
+      <button onclick="addCategory()" class="bg-purple-500 text-white px-3 rounded hover:bg-purple-600">➕ Ajouter catégorie</button>
+    </div>
+  </section>
+
+  <main id="menu" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, doc, getDocs, setDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAqmesvJgvRnZHm1777niBFRBjj0P_SBT0",
+      authDomain: "clubtwee-menu.firebaseapp.com",
+      projectId: "clubtwee-menu",
+      storageBucket: "clubtwee-menu.firebasestorage.app",
+      messagingSenderId: "852997452508",
+      appId: "1:852997452508:web:763f2e7f820b5509da3a19"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function afficherMenu() {
+      const menuDiv = document.getElementById("menu");
+      menuDiv.innerHTML = "";
+
+      const menuSnap = await getDocs(collection(db, "menus"));
+      for (let categoryDoc of menuSnap.docs) {
+        const catName = categoryDoc.id;
+        const itemsSnap = await getDocs(collection(db, `menus/${catName}/items`));
+
+        const catDiv = document.createElement("section");
+        catDiv.className = "bg-white rounded-xl shadow p-4 flex flex-col";
+        catDiv.innerHTML = `<h2 class="text-xl font-semibold mb-2 border-b pb-1">${catName}</h2>`;
+
+        itemsSnap.forEach(itemDoc => {
+          const data = itemDoc.data();
+          const itemDiv = document.createElement("div");
+          itemDiv.className = "flex justify-between items-center py-1 border-b";
+          itemDiv.innerHTML = `
+            <span>${itemDoc.id}</span>
+            <div class="flex items-center gap-2">
+              <input type="number" value="${data.price}" step="0.1" class="border rounded px-1 w-20">
+              <button onclick="updateItem('${catName}', '${itemDoc.id}', this)" class="bg-blue-500 text-white px-2 rounded hover:bg-blue-600">💾</button>
+              <button onclick="deleteItem('${catName}', '${itemDoc.id}')" class="bg-red-500 text-white px-2 rounded hover:bg-red-600">❌</button>
+            </div>
+          `;
+          catDiv.appendChild(itemDiv);
+        });
+
+        // Formulaire ajout d'item
+        const addDiv = document.createElement("div");
+        addDiv.className = "flex gap-2 mt-2";
+        addDiv.innerHTML = `
+          <input id="name-${catName}" placeholder="Nom" class="border rounded px-2 flex-1">
+          <input id="price-${catName}" type="number" placeholder="Prix" step="0.1" class="border rounded px-2 w-20">
+          <button onclick="addItem('${catName}')" class="bg-green-500 text-white px-3 rounded hover:bg-green-600">➕ Ajouter</button>
+        `;
+        catDiv.appendChild(addDiv);
+
+        menuDiv.appendChild(catDiv);
+      }
+    }
+
+    // Ajouter un item
+    window.addItem = async function(category) {
+      const name = document.getElementById(`name-${category}`).value;
+      const price = parseFloat(document.getElementById(`price-${category}`).value);
+      if (!name || isNaN(price)) return alert("Nom et prix requis");
+      await setDoc(doc(db, `menus/${category}/items`, name), { price });
+      afficherMenu();
+    }
+
+    // Mettre à jour le prix
+    window.updateItem = async function(category, name, btn) {
+      const price = parseFloat(btn.previousElementSibling.value);
+      await setDoc(doc(db, `menus/${category}/items`, name), { price });
+      alert("Prix mis à jour !");
+    }
+
+    // Supprimer un item
+    window.deleteItem = async function(category, name) {
+      if (!confirm(`Supprimer ${name} ?`)) return;
+      await deleteDoc(doc(db, `menus/${category}/items`, name));
+      afficherMenu();
+    }
+
+    // Ajouter une catégorie
+    window.addCategory = async function() {
+      const catName = document.getElementById("new-category-name").value.trim();
+      if (!catName) return alert("Nom de catégorie requis");
+      // Crée un document vide pour représenter la catégorie
+      await setDoc(doc(db, "menus", catName), {});
+      document.getElementById("new-category-name").value = "";
+      afficherMenu();
+    }
+
+    afficherMenu();
+  </script>
+</body>
+</html>

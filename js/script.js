@@ -1,71 +1,176 @@
+// Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenu = document.getElementById('close-menu');
 
-document.addEventListener("DOMContentLoaded", function() {
-    AOS.init({
-        duration: 1000
-    });
-  
-    function getNextWeekDate(startDate) {
-        let today = new Date();
-        let firstDate = new Date(startDate);
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('-translate-x-full');
+        });
 
-        // Vérifier si la date de départ est dans le futur
-        if (today < firstDate) {
-            return firstDate; // Si on est avant le 11 avril 2025, on garde cette date
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('-translate-x-full');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('-translate-x-full');
+            });
+        });
+
+        // Back to top functionality
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.add('opacity-100');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                backToTopBtn.classList.remove('opacity-100');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Calculate next second Friday of the month
+        function getNextSecondFriday() {
+            const now = new Date();
+            const currentMonth = now.getMonth();
+            const currentYear = now.getFullYear();
+            
+            let date = new Date(currentYear, currentMonth, 1);
+            let fridayCount = 0;
+            
+            while (fridayCount < 2) {
+                if (date.getDay() === 5) {
+                    fridayCount++;
+                }
+                if (fridayCount < 2) {
+                    date.setDate(date.getDate() + 1);
+                }
+            }
+            
+            if (date < now) {
+                date = new Date(currentYear, currentMonth + 1, 1);
+                fridayCount = 0;
+                
+                while (fridayCount < 2) {
+                    if (date.getDay() === 5) {
+                        fridayCount++;
+                    }
+                    if (fridayCount < 2) {
+                        date.setDate(date.getDate() + 1);
+                    }
+                }
+            }
+            
+            return date.toLocaleDateString('nl-NL', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
         }
 
-        // Calculer le nombre de semaines écoulées depuis firstDate
-        let weeksPassed = Math.floor((today - firstDate) / (7 * 24 * 60 * 60 * 1000));
+        // Check opening hours and update status
+        function updateStatus() {
+            const now = new Date();
+            const day = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
+            const hour = now.getHours();
+            const minute = now.getMinutes();
+            const currentTime = hour + (minute / 60);
 
-        // Ajouter le nombre de semaines à la date de départ
-        let nextDate = new Date(firstDate);
-        nextDate.setDate(nextDate.getDate() + (weeksPassed + 1) * 7);
+            const statusIndicator = document.getElementById('status-indicator');
+            const statusText = document.getElementById('status-text');
 
-        return nextDate;
-    }
+            let isOpen = false;
 
-    function formatDate(date) {
-        const options = { day: "2-digit", month: "long", year: "numeric" };
-        return date.toLocaleDateString("nl-NL", options).toUpperCase();
-    }
+            if (day >= 1 && day <= 5) { // Monday to Friday
+                if (currentTime >= 7.5 && currentTime < 17) { // 7:30 to 17:00
+                    isOpen = true;
+                }
+            } else if (day === 6) { // Saturday
+                if (currentTime >= 10 && currentTime < 17) { // 10:00 to 17:00
+                    isOpen = true;
+                }
+            }
 
-    const startDate = "2025-04-11";
-    const nextDate = getNextWeekDate(startDate);
+            if (isOpen) {
+                statusIndicator.className = 'w-3 h-3 rounded-full mr-2 animate-pulse bg-green-500';
+                statusText.textContent = 'Nu Open!';
+                statusText.className = 'text-sm font-semibold text-green-400';
+            } else {
+                statusIndicator.className = 'w-3 h-3 rounded-full mr-2 animate-pulse bg-red-500';
+                statusText.textContent = 'Gesloten';
+                statusText.className = 'text-sm font-semibold text-red-400';
+            }
+        }
 
-    document.getElementById("date").textContent = formatDate(nextDate);
-});
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
 
-const path = document.querySelector("#wave path");
-let step = 0;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
 
-function animateWave() {
-  step += 0.015;
-  const amplitude = 20;
-  const frequency = 0.01;
+        // Observe all animated elements
+        document.querySelectorAll('[class*="animate-"]').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
 
-  const newD = [];
-  for (let x = 0; x <= 1440; x += 60) {
-    const y = 60 + Math.sin(x * frequency + step) * amplitude;
-    newD.push(`${x},${y}`);
-  }
+        // Initialize
+        document.getElementById('date').textContent = getNextSecondFriday();
+        updateStatus();
+        
+        // Update status every minute
+        setInterval(updateStatus, 60000);
 
-  path.setAttribute("d", `M${newD.join("L")}L1440,160L0,160Z`);
-  requestAnimationFrame(animateWave);
-}
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax');
+            
+            parallaxElements.forEach(element => {
+                const speed = element.dataset.speed || 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
 
-animateWave();
+        // Add some interactive particles effect
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'fixed pointer-events-none z-0';
+            particle.style.width = Math.random() * 6 + 2 + 'px';
+            particle.style.height = particle.style.width;
+            particle.style.background = Math.random() > 0.5 ? '#ffa6c9' : '#ff2400';
+            particle.style.borderRadius = '50%';
+            particle.style.opacity = Math.random() * 0.5 + 0.1;
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = window.innerHeight + 'px';
+            
+            document.body.appendChild(particle);
+            
+            const animation = particle.animate([
+                { transform: 'translateY(0px) rotate(0deg)', opacity: particle.style.opacity },
+                { transform: `translateY(-${window.innerHeight + 100}px) rotate(360deg)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 3000 + 2000,
+                easing: 'linear'
+            });
+            
+            animation.onfinish = () => particle.remove();
+        }
 
-const waveImage = document.getElementById('waveimg');
-let xPosition = 0;
-
-function animateWaveImage() {
-  xPosition += 1;
-  waveImage.style.transform = `translateX(${xPosition}px)`;
-  
-  if (xPosition > 100) { // reset à 0 après 100px
-    xPosition = 0;
-  }
-
-  requestAnimationFrame(animateWaveImage);
-}
-
-animateWaveImage();
+        // Create particles occasionally
+        setInterval(createParticle, 3000);
