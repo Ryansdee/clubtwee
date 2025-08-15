@@ -9,87 +9,10 @@
     <meta name="keywords" content="Belegde broodjes, Grimbergen, focaccia, salades, special broodjes, afhalen, op ons terras, cosy corner, broodjeszaak">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'club-brown': '#3d0c02',
-                        'club-bg': '#edeae0',
-                        'club-red': '#ff2400',
-                        'club-pink': '#ffa6c9'
-                    },
-                    fontFamily: {
-                        'bebas': ['Bebas Neue', 'sans-serif']
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'bounce-slow': 'bounce 3s infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'wiggle': 'wiggle 1s ease-in-out infinite',
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                        'fade-in-left': 'fadeInLeft 0.8s ease-out forwards',
-                        'fade-in-right': 'fadeInRight 0.8s ease-out forwards',
-                        'scale-in': 'scaleIn 0.6s ease-out forwards'
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-20px)' }
-                        },
-                        wiggle: {
-                            '0%, 100%': { scale: '1' },
-                            '50%': { scale: '1.05', marginLeft: '25px' }
-                        },
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(30px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' }
-                        },
-                        fadeInLeft: {
-                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
-                            '100%': { opacity: '1', transform: 'translateX(0)' }
-                        },
-                        fadeInRight: {
-                            '0%': { opacity: '0', transform: 'translateX(30px)' },
-                            '100%': { opacity: '1', transform: 'translateX(0)' }
-                        },
-                        scaleIn: {
-                            '0%': { opacity: '0', transform: 'scale(0.8)' },
-                            '100%': { opacity: '1', transform: 'scale(1)' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="./js/config-tailwind.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <style>
-        .gradient-text {
-            background: linear-gradient(45deg, #3d0c02, #ff2400, #ffa6c9);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .glass-effect {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-10px) scale(1.02);
-        }
-        
-        .parallax {
-            transform: translateZ(0);
-            will-change: transform;
-        }
-    </style>
+
 </head>
 <body class="bg-club-bg overflow-x-hidden">
     <!-- Mobile Menu Button -->
@@ -484,7 +407,7 @@
         <!-- Floating action buttons -->
         <div class="fixed bottom-6 right-6 z-40 flex flex-col space-y-3">
             <a href="https://www.one2three.app/clubtwee/menu" target="_blank"
-               class="bg-club-red text-white p-4 rounded-full shadow-lg hover:bg-club-brown transition-all duration-300 hover:scale-110 animate-bounce-slow">
+               class="bg-club-red text-white p-3 rounded-full shadow-lg hover:bg-club-brown transition-all duration-300 hover:scale-110 animate-bounce-slow">
                 <i class="fas fa-shopping-cart text-xl"></i>
             </a>
             <a href="tel:+022709546"

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="nl-NL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>Menu - CLUB TWEE</title>
+    <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
+    <meta name="description" content="Ontdek de volledige menukaart van Club Twee - belegde broodjes, salades, warme focaccia, pasta boxen en meer in Grimbergen.">
+    <meta name="keywords" content="Menu, Belegde broodjes, Grimbergen, focaccia, salades, special broodjes, Club Twee">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="./js/config-tailwind.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+</head>
+<body class="bg-club-bg overflow-x-hidden">
+    <!-- Mobile Menu Button -->
+    <div class="fixed top-4 left-4 z-50 md:hidden">
+        <button id="mobile-menu-btn" class="bg-club-brown text-white p-3 rounded-full shadow-lg hover:bg-opacity-80 transition-all duration-300 hover:scale-110">
+            <i class="fas fa-bars text-xl"></i>
+        </button>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-club-brown bg-opacity-95 z-40 transform -translate-x-full transition-transform duration-500 md:hidden">
+        <div class="flex flex-col items-center justify-center h-full text-white space-y-8">
+            <button id="close-menu" class="absolute top-6 right-6 text-3xl hover:text-club-pink transition-colors">
+                <i class="fas fa-times"></i>
+            </button>
+            <a href="./index.html" class="text-3xl font-bebas uppercase hover:text-club-pink transition-colors">Home</a>
+            <a href="menu.html" class="text-3xl font-bebas uppercase hover:text-club-pink transition-colors">Menu</a>
+            <a href="https://www.one2three.app/clubtwee/menu" class="text-2xl font-bebas uppercase bg-club-red px-6 py-3 rounded-full hover:bg-opacity-80 transition-all">Bestellen</a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="relative z-30">
+        <nav class="py-4 bg-club-bg bg-opacity-90 backdrop-blur-sm sticky top-0 z-20">
+            <div class="container mx-auto px-4 flex justify-between items-center">
+                <a href="./index.html" class="mx-auto md:mx-0 animate-pulse-slow">
+                    <img src="./img/logo.png" alt="Club Twee Logo" class="w-32 md:w-48 h-auto hover:scale-105 transition-transform duration-300">
+                </a>
+                <a href="https://www.one2three.app/clubtwee/menu" class="hidden md:block text-club-brown font-bold text-xl lg:text-2xl uppercase underline decoration-2 hover:text-club-red hover:scale-105 transition-all duration-300">
+                    Bestel Online
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <div class="relative bg-gradient-to-br from-club-bg via-club-pink to-club-bg bg-repeat px-4 sm:px-6 lg:px-12 py-8 sm:py-12 lg:py-20" style="background-image: url('./img/illu-met-achtergrond-bovenaan-pagina.png');">
+            <!-- Floating decorative elements -->
+            <div class="absolute top-10 left-10 w-4 h-4 bg-club-red rounded-full animate-float opacity-60"></div>
+            <div class="absolute top-1/3 right-20 w-6 h-6 bg-club-pink rounded-full animate-bounce-slow opacity-40"></div>
+            <div class="absolute bottom-20 left-1/4 w-3 h-3 bg-club-brown rounded-full animate-pulse opacity-50"></div>
+
+            <div class="text-center">
+                <h1 class="font-bebas text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase leading-tight mb-6 text-club-brown gradient-text animate-fade-in-up">
+                    Onze Menu Kaart
+                </h1>
+                <p class="text-lg sm:text-xl lg:text-2xl text-club-red font-bebas uppercase animate-fade-in-up" style="animation-delay: 0.2s;">
+                    Vers • Lekker • Met liefde gemaakt
+                </p>
+                <div class="mt-8">
+                    <a href="https://www.one2three.app/clubtwee/menu" target="_blank" 
+                       class="bg-club-red text-white px-8 py-4 rounded-full font-bebas uppercase text-xl hover:bg-club-brown transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                        <i class="fas fa-shopping-cart mr-2"></i>Bestel Nu Online!
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Section -->
+        <div class="bg-gradient-to-b from-club-pink to-club-bg py-12 sm:py-16 lg:py-20">
+            <div class="container mx-auto px-4">
+                <!-- Loading Message -->
+                <div id="loading" class="text-center py-12">
+                    <div class="animate-spin rounded-full h-16 w-16 border-b-2 border-club-red mx-auto mb-4"></div>
+                    <p class="font-bebas text-2xl text-club-brown">Menu wordt geladen...</p>
+                </div>
+
+                <!-- Menu Container -->
+                <div id="menu" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto hidden">
+                    <!-- Menu items will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-gradient-to-r from-club-red to-club-brown text-white py-12 sm:py-16">
+            <div class="container mx-auto px-4 text-center">
+                <h2 class="font-bebas text-3xl sm:text-4xl lg:text-5xl uppercase mb-6">
+                    Klaar om te bestellen?
+                </h2>
+                <p class="text-lg sm:text-xl mb-8 max-w-2xl mx-auto">
+                    Bestel online en skip de rij, of kom langs voor de volledige Club Twee ervaring!
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="https://www.one2three.app/clubtwee/menu" target="_blank" 
+                       class="bg-white text-club-red px-8 py-4 rounded-full font-bebas uppercase text-xl hover:bg-club-pink hover:text-white transition-all duration-300 hover:scale-105">
+                        <i class="fas fa-mobile-alt mr-2"></i>Online Bestellen
+                    </a>
+                    <a href="./pdf/Kaart-CLUB-TWEE.pdf" target="_blank" 
+                       class="border-2 border-white text-white px-8 py-4 rounded-full font-bebas uppercase text-xl hover:bg-white hover:text-club-red transition-all duration-300 hover:scale-105">
+                        <i class="fas fa-download mr-2"></i>Download PDF
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-gradient-to-t from-club-brown to-gray-900 text-white py-12 sm:py-16 relative overflow-hidden">
+            <!-- Animated background -->
+            <div class="absolute inset-0 opacity-5">
+                <div class="absolute top-10 left-10 w-20 h-20 bg-club-pink rounded-full animate-float"></div>
+                <div class="absolute top-1/3 right-20 w-16 h-16 bg-club-red rounded-full animate-bounce-slow"></div>
+                <div class="absolute bottom-20 left-1/3 w-12 h-12 bg-yellow-400 rounded-full animate-pulse"></div>
+            </div>
+
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 text-center lg:text-left">
+                    <div class="animate-fade-in-up">
+                        <div class="mb-6">
+                            <img src="./img/logo.png" alt="Club Twee Logo" class="w-24 sm:w-32 mx-auto lg:mx-0 mb-4 hover:scale-105 transition-transform duration-300">
+                            <h5 class="font-bebas text-xl sm:text-2xl uppercase mb-2 text-club-pink">
+                                <i class="fas fa-home mr-2"></i>CLUB TWEE
+                            </h5>
+                            <p class="text-gray-300 italic">Your happy place ✨</p>
+                        </div>
+                        <div class="space-y-2 text-sm sm:text-base">
+                            <p class="flex items-center justify-center lg:justify-start">
+                                <i class="fas fa-map-marker-alt mr-3 text-club-red"></i>
+                                Beigemsesteenweg 2, 1850 Grimbergen
+                            </p>
+                            <p>
+                                <a href="tel:+022709546" class="flex items-center justify-center lg:justify-start hover:text-club-pink transition-colors duration-300">
+                                    <i class="fas fa-phone mr-3 text-green-400"></i>
+                                    02/270.95.46
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="animate-fade-in-up" style="animation-delay: 0.1s;">
+                        <h5 class="font-bebas text-lg sm:text-xl uppercase mb-4 text-club-pink">
+                            <i class="fas fa-utensils mr-2"></i>Menu Info
+                        </h5>
+                        <div class="space-y-3">
+                            <a href="./pdf/Kaart-CLUB-TWEE.pdf" target="_blank" 
+                               class="block hover:text-club-pink transition-colors duration-300 hover:underline">
+                                <i class="fas fa-file-pdf mr-2"></i>Download PDF Menu
+                            </a>
+                            <a href="https://www.one2three.app/clubtwee/menu" target="_blank" 
+                               class="block hover:text-club-pink transition-colors duration-300 hover:underline">
+                                <i class="fas fa-shopping-cart mr-2"></i>Online Bestellen
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="animate-fade-in-up" style="animation-delay: 0.2s;">
+                        <h5 class="font-bebas text-lg sm:text-xl uppercase mb-4 text-club-pink">
+                            <i class="fas fa-music mr-2"></i>Let's VIBE
+                        </h5>
+                        <div class="space-y-3">
+                            <a href="./index.html"
+                               class="block bg-club-red hover:bg-club-pink text-white px-4 py-2 rounded-full transition-all duration-300 hover:scale-105">
+                                <i class="fas fa-home mr-2"></i>Terug naar Home
+                            </a>
+                            <a href="https://www.instagram.com/clubtwee/" target="_blank"
+                               class="block bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-full transition-all duration-300 hover:scale-105">
+                                <i class="fab fa-instagram mr-2"></i>Follow Us
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="animate-fade-in-up" style="animation-delay: 0.3s;">
+                        <h5 class="font-bebas text-lg sm:text-xl uppercase mb-4 text-club-pink">
+                            <i class="fas fa-clock mr-2"></i>Openingsuren
+                        </h5>
+                        <div class="space-y-2 text-sm sm:text-base">
+                            <div class="flex justify-center lg:justify-start items-center">
+                                <i class="fas fa-calendar-day mr-3 text-green-400"></i>
+                                <span class="font-semibold">Ma - Vr:</span>
+                                <span class="ml-2">7u30 – 17u</span>
+                            </div>
+                            <div class="flex justify-center lg:justify-start items-center">
+                                <i class="fas fa-calendar-week mr-3 text-blue-400"></i>
+                                <span class="font-semibold">Zaterdag:</span>
+                                <span class="ml-2">10h – 17u</span>
+                            </div>
+                            <div class="flex justify-center lg:justify-start items-center">
+                                <i class="fas fa-calendar-times mr-3 text-red-400"></i>
+                                <span class="font-semibold">Zondag:</span>
+                                <span class="ml-2">gesloten</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer bottom -->
+                <hr class="border-gray-600 my-8 sm:my-12">
+                <div class="text-center space-y-4">
+                    <div class="flex justify-center space-x-6 text-2xl">
+                        <a href="https://www.instagram.com/clubtwee/" target="_blank" 
+                           class="text-gray-400 hover:text-purple-400 transition-colors duration-300 hover:scale-110">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="tel:+022709546" 
+                           class="text-gray-400 hover:text-green-400 transition-colors duration-300 hover:scale-110">
+                            <i class="fas fa-phone"></i>
+                        </a>
+                        <a href="mailto:info@clubtwee.be" 
+                           class="text-gray-400 hover:text-blue-400 transition-colors duration-300 hover:scale-110">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                    <p class="text-gray-400 text-sm sm:text-base">
+                        © 2025 <span class="font-bebas text-club-pink">CLUB TWEE</span> 
+                        - Made with <i class="fas fa-heart text-red-500 animate-pulse"></i> in Grimbergen
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Floating action buttons -->
+        <div class="fixed bottom-6 right-6 z-40 flex flex-col space-y-3">
+            <a href="https://www.one2three.app/clubtwee/menu" target="_blank"
+               class="bg-club-red text-white p-3 rounded-full shadow-lg hover:bg-club-brown transition-all duration-300 hover:scale-110 animate-bounce-slow">
+                <i class="fas fa-shopping-cart text-xl"></i>
+            </a>
+            <a href="tel:+022709546"
+               class="bg-green-500 mx-auto text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 hover:scale-110 animate-bounce-slow">
+                <i class="fas fa-phone text-xl ms-auto"></i>
+            </a>
+            <a href="https://www.instagram.com/clubtwee/" target="_blank"
+               class="bg-purple-600 mx-auto text-white p-3 rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 hover:scale-110 animate-bounce-slow">
+                <i class="fab fa-instagram text-xl"></i>
+            </a>
+        </div>
+
+        <!-- Back to top button -->
+        <button id="back-to-top" 
+                class="fixed bottom-6 left-6 z-40 bg-club-brown text-white p-4 rounded-full shadow-lg hover:bg-club-red transition-all duration-300 hover:scale-110 opacity-0 pointer-events-none">
+            <i class="fas fa-arrow-up text-xl"></i>
+        </button>
+    </main>
+
+    <script type="module">
+        // Firebase configuration
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAqmesvJgvRnZHm1777niBFRBjj0P_SBT0",
+            authDomain: "clubtwee-menu.firebaseapp.com",
+            projectId: "clubtwee-menu",
+            storageBucket: "clubtwee-menu.firebasestorage.app",
+            messagingSenderId: "852997452508",
+            appId: "1:852997452508:web:763f2e7f820b5509da3a19"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Default images per category with Club Twee theme
+        const categoryImages = {
+            "Basics": "./img/illu-your-happy-place-e1741694112378-1300x643.png",
+            "Salades": "./img/illu-bestel-online-1-e1742916871816-1300x643.png",
+            "Desserts": "./img/illu-join-the-club-e1741694077642-1300x643.png",
+            "Boissons": "./img/illu-levering-e1741694038849-1300x643.png",
+            "Focaccia": "./img/illu-your-happy-place-e1741694112378-1300x643.png",
+            "Specials": "./img/illu-join-the-club-e1741694077642-1300x643.png"
+        };
+
+        // Category icons
+        const categoryIcons = {
+            "Basics": "fas fa-bread-slice",
+            "Salades": "fas fa-leaf",
+            "Desserts": "fas fa-cookie-bite",
+            "Boissons": "fas fa-coffee",
+            "Focaccia": "fas fa-pizza-slice",
+            "Specials": "fas fa-star"
+        };
+
+        async function displayMenu() {
+            const menuContainer = document.getElementById("menu");
+            const loadingContainer = document.getElementById("loading");
+            
+            try {
+                menuContainer.innerHTML = "";
+                
+                const categoriesSnapshot = await getDocs(collection(db, "menus"));
+                let animationDelay = 0;
+
+                for (let categoryDoc of categoriesSnapshot.docs) {
+                    const categoryName = categoryDoc.id;
+                    const itemsSnapshot = await getDocs(collection(db, `menus/${categoryName}/items`));
+
+                    let itemsHTML = "";
+                    itemsSnapshot.forEach(itemDoc => {
+                        const data = itemDoc.data();
+                        itemsHTML += `
+                            <li class="flex justify-between items-center py-3 border-b border-club-pink border-opacity-30 group hover:bg-club-pink hover:bg-opacity-10 px-2 rounded transition-all duration-300">
+                                <span class="text-club-brown group-hover:text-club-red transition-colors duration-300">${itemDoc.id}</span>
+                                <span class="text-club-red font-bebas text-lg font-semibold">${data.price} €</span>
+                            </li>
+                        `;
+                    });
+
+                    // Create menu card with Club Twee styling
+                    const cardHTML = `
+                        <section class="group bg-white bg-opacity-90 backdrop-blur-sm rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl card-hover border border-white border-opacity-50 animate-scale-in" style="animation-delay: ${animationDelay * 0.1}s;">
+                            <div class="relative overflow-hidden">
+                                <img src="${categoryImages[categoryName] || categoryImages["Basics"]}" 
+                                     alt="${categoryName}" 
+                                     class="w-full h-48 sm:h-56 object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div class="absolute inset-0 bg-gradient-to-t from-club-brown via-transparent to-transparent opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
+                                <div class="absolute top-4 right-4 bg-club-red text-white px-3 py-1 rounded-full text-sm font-bebas uppercase animate-bounce-slow">
+                                    <i class="${categoryIcons[categoryName] || 'fas fa-utensils'}"></i>
+                                </div>
+                            </div>
+                            <div class="p-6 sm:p-8">
+                                <h2 class="text-center text-2xl sm:text-3xl font-bebas uppercase mb-6 text-club-brown">
+                                    <i class="${categoryIcons[categoryName] || 'fas fa-utensils'} mr-2 text-club-red"></i>
+                                    ${categoryName}
+                                </h2>
+                                <ul class="space-y-1">
+                                    ${itemsHTML}
+                                </ul>
+                            </div>
+                        </section>
+                    `;
+
+                    menuContainer.innerHTML += cardHTML;
+                    animationDelay++;
+                }
+
+                // Hide loading and show menu
+                loadingContainer.classList.add('hidden');
+                menuContainer.classList.remove('hidden');
+
+            } catch (error) {
+                console.error("Erreur lors du chargement du menu:", error);
+                loadingContainer.innerHTML = `
+                    <div class="text-center py-12">
+                        <i class="fas fa-exclamation-triangle text-4xl text-club-red mb-4"></i>
+                        <p class="font-bebas text-2xl text-club-brown mb-4">Oops! Er is een probleem opgetreden</p>
+                        <p class="text-club-brown mb-6">Het menu kan momenteel niet worden geladen.</p>
+                        <a href="./pdf/Kaart-CLUB-TWEE.pdf" target="_blank" 
+                           class="bg-club-red text-white px-6 py-3 rounded-full font-bebas uppercase text-lg hover:bg-club-brown transition-all duration-300 hover:scale-105">
+                            <i class="fas fa-download mr-2"></i>Download PDF Menu
+                        </a>
+                    </div>
+                `;
+            }
+        }
+
+        // Mobile menu functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMenuBtn = document.getElementById('close-menu');
+            const backToTopBtn = document.getElementById('back-to-top');
+
+            // Mobile menu toggle
+            mobileMenuBtn?.addEventListener('click', () => {
+                mobileMenu.classList.remove('-translate-x-full');
+            });
+
+            closeMenuBtn?.addEventListener('click', () => {
+                mobileMenu.classList.add('-translate-x-full');
+            });
+
+            // Close mobile menu when clicking outside
+            mobileMenu?.addEventListener('click', (e) => {
+                if (e.target === mobileMenu) {
+                    mobileMenu.classList.add('-translate-x-full');
+                }
+            });
+
+            // Back to top button
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                } else {
+                    backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
+                }
+            });
+
+            backToTopBtn?.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // Initialize menu
+        displayMenu();
+    </script>
+</body>
+</html>
