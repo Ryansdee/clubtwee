@@ -59,8 +59,8 @@
             <i class="fas fa-utensils text-2xl"></i>
           </div>
           <div>
-            <h1 class="text-3xl md:text-4xl font-bebas uppercase tracking-wide">Administration Menu</h1>
-            <p class="text-white text-opacity-80">Gestion du menu Club Twee</p>
+            <h1 class="text-3xl md:text-4xl font-bebas uppercase tracking-wide">Addn and delete items Menu</h1>
+            <p class="text-white text-opacity-80">Club twee menu</p>
           </div>
         </div>
         <div class="hidden md:flex items-center space-x-4">
@@ -68,7 +68,7 @@
             <span id="total-items" class="font-bebas text-xl">0 items</span>
           </div>
           <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
-            <span id="total-categories" class="font-bebas text-xl">0 catégories</span>
+            <span id="total-categories" class="font-bebas text-xl">0 categories</span>
           </div>
         </div>
       </div>
@@ -79,7 +79,7 @@
   <div id="loading-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
     <div class="bg-white rounded-xl p-8 flex flex-col items-center space-y-4">
       <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-club-red"></div>
-      <p class="font-bebas text-xl text-club-brown">Chargement...</p>
+      <p class="font-bebas text-xl text-club-brown">Loading</p>
     </div>
   </div>
 
@@ -93,7 +93,7 @@
         <div class="bg-gradient-to-r from-club-red to-club-brown p-3 rounded-full text-white">
           <i class="fas fa-plus text-xl"></i>
         </div>
-        <h2 class="text-2xl font-bebas uppercase text-club-brown">Ajouter une catégorie</h2>
+        <h2 class="text-2xl font-bebas uppercase text-club-brown">Add a category</h2>
       </div>
       
       <form id="category-form" class="flex flex-col md:flex-row gap-4">
@@ -101,7 +101,7 @@
           <input 
             id="new-category-name" 
             type="text"
-            placeholder="Nom de la catégorie (ex: Salades, Boissons...)" 
+            placeholder="Category (Broodjes, Dranken, Desserts,...)" 
             class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-club-red focus:outline-none transition-colors duration-300 text-lg"
             required
           >
@@ -111,7 +111,7 @@
           class="bg-gradient-to-r from-club-red to-club-brown text-white px-8 py-3 rounded-xl font-bebas uppercase text-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center space-x-2"
         >
           <i class="fas fa-plus"></i>
-          <span>Ajouter Catégorie</span>
+          <span>Add category</span>
         </button>
       </form>
     </div>
@@ -376,23 +376,29 @@
             <input 
               id="name-${catName}" 
               type="text"
-              placeholder="Nom du nouvel item" 
+              placeholder="Item name" 
               class="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:border-club-red focus:outline-none transition-colors duration-300"
             >
             <input 
               id="price-${catName}" 
               type="number" 
-              placeholder="Prix" 
+              placeholder="Price" 
               step="0.1" 
               min="0"
               class="w-32 px-4 py-3 border border-gray-200 rounded-xl focus:border-club-red focus:outline-none transition-colors duration-300"
+            >
+            <input 
+              id="desc-${catName}" 
+              type="text" 
+              placeholder="Description" 
+              class="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:border-club-red focus:outline-none transition-colors duration-300"
             >
             <button 
               onclick="addItem('${catName}')"
               class="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-xl font-bebas uppercase hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
             >
               <i class="fas fa-plus"></i>
-              <span>Ajouter</span>
+              <span>Add</span>
             </button>
           </div>
         </div>
@@ -403,43 +409,48 @@
 
     // CRUD Operations
     window.addItem = async function(category) {
-      const nameEl = document.getElementById(`name-${category}`);
-      const priceEl = document.getElementById(`price-${category}`);
-      
-      const name = sanitizeInput(nameEl.value);
-      const price = parseFloat(priceEl.value);
+      const nameInput = document.getElementById(`name-${category}`);
+      const priceInput = document.getElementById(`price-${category}`);
+      const descInput = document.getElementById(`desc-${category}`);
 
-      if (!validateInput(name, 'text')) {
-        nameEl.classList.add('animate-shake', 'border-red-500');
-        setTimeout(() => {
-          nameEl.classList.remove('animate-shake', 'border-red-500');
-        }, 500);
-        showToast('Le nom doit contenir au moins 2 caractères', 'error');
+      const name = sanitizeInput(nameInput.value);
+      const price = parseFloat(priceInput.value);
+      const description = sanitizeInput(descInput.value);
+
+      if (!validateInput(name)) {
+        showToast("Nom invalide pour l'item", "error");
         return;
       }
 
       if (!validateInput(price, 'price')) {
-        priceEl.classList.add('animate-shake', 'border-red-500');
-        setTimeout(() => {
-          priceEl.classList.remove('animate-shake', 'border-red-500');
-        }, 500);
-        showToast('Le prix doit être un nombre positif', 'error');
+        showToast("Prix invalide", "error");
         return;
       }
 
-      try {
-        showLoading();
-        await setDoc(doc(db, `menus/${category}/items`, name), { price });
-        nameEl.value = '';
-        priceEl.value = '';
-        showToast(`"${name}" met success ge-aded!`);
-        await loadMenu();
-      } catch (error) {
-        console.error('Erreur lors de l\'ajout:', error);
-        showToast('Erreur lors de l\'ajout de l\'item', 'error');
-        hideLoading();
+      if (!validateInput(description)) {
+        showToast("Description invalide", "error");
+        return;
       }
-    }
+
+      showLoading();
+      try {
+        const itemRef = doc(db, `menus/${category}/items/${name}`);
+        await setDoc(itemRef, {
+          price,
+          description
+        });
+        showToast(`Item "${name}" ajouté avec succès`);
+        nameInput.value = "";
+        priceInput.value = "";
+        descInput.value = "";
+        loadMenu();
+      } catch (error) {
+        console.error(error);
+        showToast("Erreur lors de l'ajout de l'item", "error");
+      }
+      hideLoading();
+    };
+
 
     window.updateItemPrice = async function(category, name, newPrice) {
       const price = parseFloat(newPrice);

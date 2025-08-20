@@ -570,12 +570,42 @@
             "Basics": { 
                 icon: "fa-solid fa-thumbs-up", 
                 emoji: "🥪",
-                description: "Onze klassieke belegde broodjes"
+                description: "Onze klassiekers"
             },
             "salades": { 
                 icon: "fa-solid fa-leaf", // using leaf icon for salads
                 emoji: "🥗",
                 description: "Verse, gezonde salades"
+            },
+            "cocktails": { 
+                icon: "fa-solid fa-cocktail", // cocktail glass icon
+                emoji: "🍹",
+                description: "Verfrissende cocktails"
+            },
+            "drinks": { 
+                icon: "fa-solid fa-glass-water", // water glass icon
+                emoji: "🥤",
+                description: "Verfrissende dranken"
+            },
+            "wijnen": { 
+                icon: "fa-solid fa-wine-glass", // wine glass icon
+                emoji: "🍷",
+                description: "Onze selectie wijnen"
+            },
+            "zoet": { 
+                icon: "fa-solid fa-candy-cane", // candy cane for sweets
+                emoji: "🍬",
+                description: "Zoete lekkernijen"
+            },
+            "zandwich": { 
+                icon: "fa-solid fa-sandwich", // sandwich icon
+                emoji: "🥪",
+                description: "Heerlijke sandwiches allen op zaterdag beschikbaar!"
+            },
+            "bier":{
+                icon: "fa-solid fa-beer", // beer icon for beer category
+                emoji: "🍺",
+                description: "Onze selectie bieren"
             },
             "Desserts": { 
                 icon: "fab fa-bitcoin", // creative use as it looks like a sweet treat
@@ -584,7 +614,7 @@
             },
             "broodjes": { 
                 emoji: "☕",
-                description: "Warme en koude dranken",
+                description: "Onze klassieke belegde broodjes",
                 svg : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-11 0 50 22" width="512" height="512"> <path fill="white" d="M21,18H3a3,3,0,0,0,0,6H21A3,3,0,0,0,21,18Zm0,4H3a1,1,0,0,1,0-2H21A1,1,0,0,1,21,22ZM22.8,5.374,19.687,1.747a4.97,4.97,0,0,0-5.8-1.328L3,5.184A5,5,0,0,0,0,9.765,3.024,3.024,0,0,0,3,13H21a3,3,0,0,0,3-3A6.169,6.169,0,0,0,22.8,5.374ZM14.688,2.251a2.987,2.987,0,0,1,3.48.8c.092.126,3.395,3.909,3.341,3.952H3.834ZM22,10a1,1,0,0,1-1,1H3C1.949,11,1.861,9.776,2.105,9H22Zm2,6a.99.99,0,0,1-1.584.79l-.011.014c-.386-.255-1.284-1.224-1.96-.638a4.011,4.011,0,0,1-4.889,0,.944.944,0,0,0-1.111,0,4.061,4.061,0,0,1-4.889,0,.942.942,0,0,0-1.111,0,4.061,4.061,0,0,1-4.889,0c-.67-.589-1.589.389-1.961.637l-.011-.014A.982.982,0,0,1,.416,15.21L.405,15.2s.573-.423.816-.612a2.946,2.946,0,0,1,3.558,0,2.031,2.031,0,0,0,2.443,0,2.946,2.946,0,0,1,3.557,0,2.031,2.031,0,0,0,2.443,0,2.946,2.946,0,0,1,3.557,0,2.031,2.031,0,0,0,2.443,0,2.946,2.946,0,0,1,3.557,0c.243.189.815.611.816.612l-.011.014A.982.982,0,0,1,24,16Z"/> </svg>`
             },
             "focaccia": { 
@@ -632,6 +662,11 @@
                                     <h4 class="font-medium text-ink group-hover:text-club-red transition-colors duration-300 text-base md:text-lg">
                                         ${itemDoc.id}
                                     </h4>
+                                    ${data.description ? `
+                                        <p class="text-sm text-gray-500 mt-1 group-hover:text-ink transition-colors duration-300">
+                                            ${data.description}
+                                        </p>
+                                    ` : ""}
                                 </div>
                                 <div class="price-dots"></div>
                                 <div class="flex-shrink-0">
