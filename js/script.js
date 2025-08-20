@@ -89,11 +89,11 @@
             let isOpen = false;
 
             if (day >= 1 && day <= 5) { // Monday to Friday
-                if (currentTime >= 7.5 && currentTime < 17) { // 7:30 to 17:00
+                if (currentTime >= 8.5 && currentTime < 17) { // 8:30 to 17:00
                     isOpen = true;
                 }
             } else if (day === 6) { // Saturday
-                if (currentTime >= 10 && currentTime < 17) { // 10:00 to 17:00
+                if (currentTime >= 10 && currentTime < 15) { // 10:00 to 15:00
                     isOpen = true;
                 }
             }
