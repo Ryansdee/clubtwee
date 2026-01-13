@@ -240,9 +240,11 @@
         // Create category card HTML
         function createCategoryCard(categoryName, items) {
             const itemsHTML = items.map(item => createMenuItem(item.name, item.data)).join('');
+            const isPickAndPlate = categoryName.toLowerCase() === 'pick & plate';
+            const borderStyle = isPickAndPlate ? 'border-style: dashed;' : '';
             
             return `
-                <div class="menu-card p-6">
+                <div class="menu-card p-6" style="${borderStyle}">
                     <h2 class="section-title text-2xl md:text-3xl">${categoryName.toUpperCase()}</h2>
                     <div class="space-y-1">
                         ${itemsHTML}
