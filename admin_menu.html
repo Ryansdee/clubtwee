@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="nl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Administration Menu - Club Twee</title>
+  <title>Menu Beheer - Club Twee</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <script>
@@ -11,19 +11,13 @@
       theme: {
         extend: {
           colors: {
-            'club-bg': '#f8f4f0',
-            'club-pink': '#f4c2c2',
-            'club-red': '#d44545',
-            'club-brown': '#8b4513'
+            'menu-bg': '#E5E4E2',
+            'menu-cream': '#f5f0e8',
+            'menu-burgundy': '#580712',
+            'menu-brown': '#3d2314'
           },
           fontFamily: {
             'bebas': ['Bebas Neue', 'cursive']
-          },
-          animation: {
-            'fade-in': 'fadeIn 0.5s ease-in-out',
-            'slide-up': 'slideUp 0.3s ease-out',
-            'shake': 'shake 0.5s ease-in-out',
-            'pulse-slow': 'pulse 2s infinite'
           }
         }
       }
@@ -31,36 +25,21 @@
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes slideUp {
-      from { transform: translateY(100px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-5px); }
-      75% { transform: translateX(5px); }
-    }
-    .gradient-bg {
-      background: linear-gradient(135deg, #f8f4f0 0%, #f4c2c2 50%, #f8f4f0 100%);
-    }
+    .font-bebas { font-family: 'Bebas Neue', sans-serif; }
   </style>
 </head>
-<body class="gradient-bg min-h-screen">
+<body class="bg-menu-bg min-h-screen">
   <!-- Header -->
-  <header class="bg-gradient-to-r from-club-brown to-club-red text-white shadow-2xl">
-    <div class="max-w-7xl mx-auto px-6 py-8">
+  <header class="bg-menu-burgundy text-white shadow-lg">
+    <div class="max-w-7xl mx-auto px-6 py-6">
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-4">
           <div class="bg-white bg-opacity-20 p-3 rounded-full">
             <i class="fas fa-utensils text-2xl"></i>
           </div>
           <div>
-            <h1 class="text-3xl md:text-4xl font-bebas uppercase tracking-wide">Addn and delete items Menu</h1>
-            <p class="text-white text-opacity-80">Club twee menu</p>
+            <h1 class="text-3xl md:text-4xl font-bebas uppercase tracking-wide">Menu Beheer</h1>
+            <p class="text-white text-opacity-80">Club Twee - Admin Panel</p>
           </div>
         </div>
         <div class="hidden md:flex items-center space-x-4">
@@ -68,8 +47,11 @@
             <span id="total-items" class="font-bebas text-xl">0 items</span>
           </div>
           <div class="bg-white bg-opacity-20 px-4 py-2 rounded-full">
-            <span id="total-categories" class="font-bebas text-xl">0 categories</span>
+            <span id="total-categories" class="font-bebas text-xl">0 categorieën</span>
           </div>
+          <a href="./menu.html" target="_blank" class="bg-white text-menu-burgundy px-4 py-2 rounded-full font-bebas hover:bg-opacity-90 transition-colors">
+            <i class="fas fa-eye mr-2"></i>Bekijk Menu
+          </a>
         </div>
       </div>
     </div>
@@ -78,8 +60,8 @@
   <!-- Loading Overlay -->
   <div id="loading-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center hidden">
     <div class="bg-white rounded-xl p-8 flex flex-col items-center space-y-4">
-      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-club-red"></div>
-      <p class="font-bebas text-xl text-club-brown">Loading</p>
+      <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-menu-burgundy"></div>
+      <p class="font-bebas text-xl text-menu-brown">Laden...</p>
     </div>
   </div>
 
@@ -88,12 +70,12 @@
 
   <div class="max-w-7xl mx-auto px-6 py-8">
     <!-- Add Category Section -->
-    <div class="bg-white rounded-2xl shadow-xl p-6 mb-8 border border-club-pink border-opacity-30">
+    <div class="bg-menu-cream rounded-2xl shadow-lg p-6 mb-8 border-2 border-menu-burgundy">
       <div class="flex items-center space-x-4 mb-6">
-        <div class="bg-gradient-to-r from-club-red to-club-brown p-3 rounded-full text-white">
+        <div class="bg-menu-burgundy p-3 rounded-full text-white">
           <i class="fas fa-plus text-xl"></i>
         </div>
-        <h2 class="text-2xl font-bebas uppercase text-club-brown">Add a category</h2>
+        <h2 class="text-2xl font-bebas uppercase text-menu-burgundy">Nieuwe Categorie Toevoegen</h2>
       </div>
       
       <form id="category-form" class="flex flex-col md:flex-row gap-4">
@@ -101,17 +83,17 @@
           <input 
             id="new-category-name" 
             type="text"
-            placeholder="Category (Broodjes, Dranken, Desserts,...)" 
-            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-club-red focus:outline-none transition-colors duration-300 text-lg"
+            placeholder="Categorienaam (Broodjes, Dranken, Desserts,...)" 
+            class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-menu-burgundy focus:outline-none transition-colors text-lg"
             required
           >
         </div>
         <button 
           type="submit"
-          class="bg-gradient-to-r from-club-red to-club-brown text-white px-8 py-3 rounded-xl font-bebas uppercase text-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center space-x-2"
+          class="bg-menu-burgundy text-white px-8 py-3 rounded-xl font-bebas uppercase text-lg hover:bg-menu-brown transition-colors flex items-center space-x-2"
         >
           <i class="fas fa-plus"></i>
-          <span>Add category</span>
+          <span>Toevoegen</span>
         </button>
       </form>
     </div>
@@ -123,15 +105,15 @@
 
     <!-- Empty State -->
     <div id="empty-state" class="text-center py-16 hidden">
-      <div class="bg-white rounded-2xl shadow-xl p-12 border border-club-pink border-opacity-30">
-        <i class="fas fa-utensils text-6xl text-club-pink mb-6"></i>
-        <h3 class="text-3xl font-bebas uppercase text-club-brown mb-4">Aucune catégorie trouvée</h3>
-        <p class="text-gray-600 text-lg mb-8">Commencez par ajouter votre première catégorie de menu</p>
+      <div class="bg-menu-cream rounded-2xl shadow-lg p-12 border-2 border-menu-burgundy">
+        <i class="fas fa-utensils text-6xl text-menu-burgundy opacity-50 mb-6"></i>
+        <h3 class="text-3xl font-bebas uppercase text-menu-burgundy mb-4">Geen categorieën gevonden</h3>
+        <p class="text-gray-600 text-lg mb-8">Begin met het toevoegen van je eerste menucategorie</p>
         <button 
           onclick="document.getElementById('new-category-name').focus()"
-          class="bg-gradient-to-r from-club-red to-club-brown text-white px-8 py-3 rounded-xl font-bebas uppercase text-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+          class="bg-menu-burgundy text-white px-8 py-3 rounded-xl font-bebas uppercase text-lg hover:bg-menu-brown transition-colors"
         >
-          Créer une catégorie
+          Categorie Aanmaken
         </button>
       </div>
     </div>
@@ -144,20 +126,20 @@
         <div class="bg-red-100 p-4 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
           <i class="fas fa-exclamation-triangle text-2xl text-red-600"></i>
         </div>
-        <h3 class="text-xl font-bebas uppercase text-gray-800 mb-2">Confirmer la suppression</h3>
+        <h3 class="text-xl font-bebas uppercase text-gray-800 mb-2">Verwijdering Bevestigen</h3>
         <p id="confirm-message" class="text-gray-600 mb-6"></p>
         <div class="flex space-x-4">
           <button 
             id="confirm-cancel"
-            class="flex-1 bg-gray-200 text-gray-800 px-6 py-3 rounded-xl font-semibold hover:bg-gray-300 transition-colors duration-300"
+            class="flex-1 bg-gray-200 text-gray-800 px-6 py-3 rounded-xl font-semibold hover:bg-gray-300 transition-colors"
           >
-            Annuler
+            Annuleren
           </button>
           <button 
             id="confirm-delete"
-            class="flex-1 bg-red-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-red-700 transition-colors duration-300"
+            class="flex-1 bg-red-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-red-700 transition-colors"
           >
-            Supprimer
+            Verwijderen
           </button>
         </div>
       </div>
@@ -198,7 +180,7 @@
       const bgColor = type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500';
       const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle';
       
-      toast.className = `${bgColor} text-white px-6 py-4 rounded-xl shadow-lg flex items-center space-x-3 animate-slide-up transform transition-all duration-300`;
+      toast.className = `${bgColor} text-white px-6 py-4 rounded-xl shadow-lg flex items-center space-x-3`;
       toast.innerHTML = `
         <i class="fas ${icon}"></i>
         <span>${message}</span>
@@ -215,13 +197,13 @@
     }
 
     function updateStats() {
-      document.getElementById('total-categories').textContent = `${currentCategories.length} catégorie${currentCategories.length !== 1 ? 's' : ''}`;
+      document.getElementById('total-categories').textContent = `${currentCategories.length} categorie${currentCategories.length !== 1 ? 'ën' : ''}`;
       document.getElementById('total-items').textContent = `${totalItems} item${totalItems !== 1 ? 's' : ''}`;
     }
 
     function validateInput(value, type = 'text') {
       if (type === 'text') {
-        return value && value.trim().length >= 2;
+        return value && value.trim().length >= 1;
       }
       if (type === 'price') {
         return !isNaN(value) && parseFloat(value) >= 0;
@@ -229,8 +211,9 @@
       return false;
     }
 
+    // Sanitize input - remove slashes to prevent Firestore path issues
     function sanitizeInput(input) {
-      return input.trim().replace(/[<>]/g, '');
+      return input.trim().replace(/[<>\/\\]/g, '-');
     }
 
     // Confirmation Modal
@@ -295,48 +278,53 @@
 
         updateStats();
       } catch (error) {
-        console.error('Erreur lors du chargement:', error);
-        showToast('Erreur lors du chargement du menu', 'error');
+        console.error('Fout bij laden:', error);
+        showToast('Fout bij het laden van het menu', 'error');
       }
       hideLoading();
     }
 
     function createCategoryCard(catName, itemsSnap) {
       const card = document.createElement('div');
-      card.className = 'bg-white rounded-2xl shadow-xl border border-club-pink border-opacity-30 overflow-hidden animate-fade-in';
+      card.className = 'bg-menu-cream rounded-2xl shadow-lg border-2 border-menu-burgundy overflow-hidden';
       
       let itemsHTML = '';
       const items = [];
       
       itemsSnap.forEach(itemDoc => {
         const data = itemDoc.data();
-        items.push({ name: itemDoc.id, price: data.price });
+        items.push({ 
+          name: itemDoc.id, 
+          price: data.price,
+          description: data.description || ''
+        });
       });
 
       items.sort((a, b) => a.name.localeCompare(b.name));
 
       items.forEach(item => {
         itemsHTML += `
-          <div class="flex items-center justify-between py-4 px-6 border-b border-gray-100 hover:bg-club-pink hover:bg-opacity-10 transition-colors duration-300 group">
-            <div class="flex-1">
-              <span class="text-lg font-medium text-gray-800 group-hover:text-club-brown transition-colors duration-300">${item.name}</span>
+          <div class="flex items-center justify-between py-3 px-6 border-b border-menu-burgundy border-opacity-20 hover:bg-white transition-colors group">
+            <div class="flex-1 min-w-0 mr-4">
+              <span class="text-lg font-semibold text-menu-burgundy block truncate">${item.name}</span>
+              ${item.description ? `<span class="text-sm text-gray-500 block truncate">${item.description}</span>` : ''}
             </div>
-            <div class="flex items-center space-x-3">
-              <div class="flex items-center space-x-2">
+            <div class="flex items-center space-x-3 flex-shrink-0">
+              <div class="flex items-center space-x-1">
                 <span class="text-sm text-gray-500">€</span>
                 <input 
                   type="number" 
                   value="${item.price}" 
                   step="0.1" 
                   min="0"
-                  class="w-20 px-3 py-2 border border-gray-200 rounded-lg text-center font-medium focus:border-club-red focus:outline-none transition-colors duration-300"
+                  class="w-20 px-2 py-1 border border-gray-300 rounded-lg text-center font-medium focus:border-menu-burgundy focus:outline-none"
                   onchange="updateItemPrice('${catName}', '${item.name}', this.value)"
                 >
               </div>
               <button 
                 onclick="deleteItemWithConfirm('${catName}', '${item.name}')"
-                class="bg-red-100 text-red-600 p-2 rounded-lg hover:bg-red-200 transition-colors duration-300"
-                title="Supprimer cet item"
+                class="bg-red-100 text-red-600 p-2 rounded-lg hover:bg-red-200 transition-colors"
+                title="Item verwijderen"
               >
                 <i class="fas fa-trash text-sm"></i>
               </button>
@@ -345,60 +333,64 @@
         `;
       });
 
+      // Escape single quotes in category name for onclick handlers
+      const escapedCatName = catName.replace(/'/g, "\\'");
+
       card.innerHTML = `
-        <div class="bg-gradient-to-r from-club-red to-club-brown text-white p-6">
+        <div class="bg-menu-burgundy text-white p-5">
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-4">
-              <div class="bg-white bg-opacity-20 p-3 rounded-full">
-                <i class="fas fa-utensils text-xl"></i>
+              <div class="bg-white bg-opacity-20 p-2 rounded-full">
+                <i class="fas fa-folder text-lg"></i>
               </div>
               <div>
                 <h3 class="text-2xl font-bebas uppercase">${catName}</h3>
-                <p class="text-white text-opacity-80">${items.length} item${items.length !== 1 ? 's' : ''}</p>
+                <p class="text-white text-opacity-80 text-sm">${items.length} item${items.length !== 1 ? 's' : ''}</p>
               </div>
             </div>
             <button 
-              onclick="deleteCategoryWithConfirm('${catName}')"
-              class="bg-white bg-opacity-20 text-white p-3 rounded-full hover:bg-opacity-30 transition-all duration-300"
-              title="Supprimer cette catégorie"
+              onclick="deleteCategoryWithConfirm('${escapedCatName}')"
+              class="bg-white bg-opacity-20 text-white p-2 rounded-full hover:bg-opacity-30 transition-colors"
+              title="Categorie verwijderen"
             >
-              <i class="fas fa-trash text-lg"></i>
+              <i class="fas fa-trash"></i>
             </button>
           </div>
         </div>
         
-        <div class="divide-y divide-gray-100">
-          ${itemsHTML}
+        <div class="max-h-96 overflow-y-auto">
+          ${itemsHTML || '<p class="p-6 text-gray-500 text-center">Geen items in deze categorie</p>'}
         </div>
         
-        <div class="p-6 bg-gray-50">
-          <div class="flex flex-col md:flex-row gap-4">
+        <div class="p-4 bg-white border-t-2 border-menu-burgundy border-opacity-20">
+          <p class="text-sm text-menu-burgundy font-semibold mb-3">Nieuw item toevoegen:</p>
+          <div class="flex flex-col lg:flex-row gap-3">
             <input 
               id="name-${catName}" 
               type="text"
-              placeholder="Item name" 
-              class="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:border-club-red focus:outline-none transition-colors duration-300"
+              placeholder="Naam" 
+              class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:border-menu-burgundy focus:outline-none"
             >
             <input 
               id="price-${catName}" 
               type="number" 
-              placeholder="Price" 
+              placeholder="Prijs" 
               step="0.1" 
               min="0"
-              class="w-32 px-4 py-3 border border-gray-200 rounded-xl focus:border-club-red focus:outline-none transition-colors duration-300"
+              class="w-24 px-3 py-2 border border-gray-300 rounded-lg focus:border-menu-burgundy focus:outline-none"
             >
             <input 
               id="desc-${catName}" 
               type="text" 
-              placeholder="Description" 
-              class="flex-1 px-4 py-3 border border-gray-200 rounded-xl focus:border-club-red focus:outline-none transition-colors duration-300"
+              placeholder="Beschrijving (optioneel)" 
+              class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:border-menu-burgundy focus:outline-none"
             >
             <button 
-              onclick="addItem('${catName}')"
-              class="bg-gradient-to-r from-green-500 to-green-600 text-white px-6 py-3 rounded-xl font-bebas uppercase hover:shadow-lg transform hover:scale-105 transition-all duration-300 flex items-center justify-center space-x-2"
+              onclick="addItem('${escapedCatName}')"
+              class="bg-green-600 text-white px-4 py-2 rounded-lg font-bebas uppercase hover:bg-green-700 transition-colors flex items-center justify-center space-x-2"
             >
               <i class="fas fa-plus"></i>
-              <span>Add</span>
+              <span>Toevoegen</span>
             </button>
           </div>
         </div>
@@ -415,20 +407,17 @@
 
       const name = sanitizeInput(nameInput.value);
       const price = parseFloat(priceInput.value);
-      const description = sanitizeInput(descInput.value);
+      const description = descInput.value.trim();
 
       if (!validateInput(name)) {
-        showToast("Nom invalide pour l'item", "error");
+        showToast("Vul een geldige naam in", "error");
+        nameInput.focus();
         return;
       }
 
       if (!validateInput(price, 'price')) {
-        showToast("Prix invalide", "error");
-        return;
-      }
-
-      if (!validateInput(description)) {
-        showToast("Description invalide", "error");
+        showToast("Vul een geldige prijs in", "error");
+        priceInput.focus();
         return;
       }
 
@@ -439,40 +428,51 @@
           price,
           description
         });
-        showToast(`Item "${name}" ajouté avec succès`);
+        showToast(`"${name}" toegevoegd!`);
         nameInput.value = "";
         priceInput.value = "";
         descInput.value = "";
         loadMenu();
       } catch (error) {
         console.error(error);
-        showToast("Erreur lors de l'ajout de l'item", "error");
+        showToast("Fout bij het toevoegen van item", "error");
       }
       hideLoading();
     };
-
 
     window.updateItemPrice = async function(category, name, newPrice) {
       const price = parseFloat(newPrice);
       
       if (!validateInput(price, 'price')) {
-        showToast('Prix invalide', 'error');
-        await loadMenu(); // Reload to reset the input
+        showToast('Ongeldige prijs', 'error');
+        await loadMenu();
         return;
       }
 
       try {
-        await setDoc(doc(db, `menus/${category}/items`, name), { price });
-        showToast('Prix mis à jour!');
+        // Get existing data first
+        const itemsSnap = await getDocs(collection(db, `menus/${category}/items`));
+        let existingData = {};
+        itemsSnap.forEach(doc => {
+          if (doc.id === name) {
+            existingData = doc.data();
+          }
+        });
+
+        await setDoc(doc(db, `menus/${category}/items`, name), { 
+          price,
+          description: existingData.description || ''
+        });
+        showToast('Prijs bijgewerkt!');
       } catch (error) {
-        console.error('Erreur lors de la mise à jour:', error);
-        showToast('Erreur lors de la mise à jour du prix', 'error');
+        console.error('Fout bij bijwerken:', error);
+        showToast('Fout bij het bijwerken van de prijs', 'error');
       }
     }
 
     window.deleteItemWithConfirm = function(category, name) {
       showConfirmModal(
-        `Êtes-vous sûr de vouloir supprimer "${name}" ?`,
+        `Weet je zeker dat je "${name}" wilt verwijderen?`,
         () => deleteItem(category, name)
       );
     }
@@ -481,18 +481,18 @@
       try {
         showLoading();
         await deleteDoc(doc(db, `menus/${category}/items`, name));
-        showToast(`"${name}" supprimé avec succès!`);
+        showToast(`"${name}" verwijderd!`);
         await loadMenu();
       } catch (error) {
-        console.error('Erreur lors de la suppression:', error);
-        showToast('Erreur lors de la suppression de l\'item', 'error');
+        console.error('Fout bij verwijderen:', error);
+        showToast('Fout bij het verwijderen van item', 'error');
         hideLoading();
       }
     }
 
     window.deleteCategoryWithConfirm = function(category) {
       showConfirmModal(
-        `Êtes-vous sûr de vouloir supprimer la catégorie "${category}" et tous ses items ?`,
+        `Weet je zeker dat je de categorie "${category}" en alle items wilt verwijderen?`,
         () => deleteCategory(category)
       );
     }
@@ -512,11 +512,11 @@
         batch.delete(doc(db, "menus", category));
         
         await batch.commit();
-        showToast(`Catégorie "${category}" supprimée avec succès!`);
+        showToast(`Categorie "${category}" verwijderd!`);
         await loadMenu();
       } catch (error) {
-        console.error('Erreur lors de la suppression de la catégorie:', error);
-        showToast('Erreur lors de la suppression de la catégorie', 'error');
+        console.error('Fout bij verwijderen categorie:', error);
+        showToast('Fout bij het verwijderen van de categorie', 'error');
         hideLoading();
       }
     }
@@ -529,20 +529,14 @@
       const catName = sanitizeInput(nameEl.value);
       
       if (!validateInput(catName, 'text')) {
-        nameEl.classList.add('animate-shake', 'border-red-500');
-        setTimeout(() => {
-          nameEl.classList.remove('animate-shake', 'border-red-500');
-        }, 500);
-        showToast('Le nom de la catégorie doit contenir au moins 2 caractères', 'error');
+        showToast('Categorienaam moet minstens 1 karakter bevatten', 'error');
+        nameEl.focus();
         return;
       }
 
-      if (currentCategories.includes(catName)) {
-        nameEl.classList.add('animate-shake', 'border-red-500');
-        setTimeout(() => {
-          nameEl.classList.remove('animate-shake', 'border-red-500');
-        }, 500);
-        showToast('Cette catégorie existe déjà', 'error');
+      if (currentCategories.map(c => c.toLowerCase()).includes(catName.toLowerCase())) {
+        showToast('Deze categorie bestaat al', 'error');
+        nameEl.focus();
         return;
       }
 
@@ -550,11 +544,11 @@
         showLoading();
         await setDoc(doc(db, "menus", catName), { created: new Date() });
         nameEl.value = '';
-        showToast(`Catégorie "${catName}" créée avec succès!`);
+        showToast(`Categorie "${catName}" aangemaakt!`);
         await loadMenu();
       } catch (error) {
-        console.error('Erreur lors de la création de la catégorie:', error);
-        showToast('Erreur lors de la création de la catégorie', 'error');
+        console.error('Fout bij aanmaken categorie:', error);
+        showToast('Fout bij het aanmaken van de categorie', 'error');
         hideLoading();
       }
     });
@@ -563,12 +557,12 @@
     document.addEventListener('DOMContentLoaded', function() {
       loadMenu();
       
-      // Add keyboard shortcuts
+      // Keyboard shortcut to reload
       document.addEventListener('keydown', function(e) {
         if (e.ctrlKey && e.key === 'r') {
           e.preventDefault();
           loadMenu();
-          showToast('Menu rechargé!', 'info');
+          showToast('Menu herladen!', 'info');
         }
       });
     });

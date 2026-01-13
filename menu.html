@@ -5,41 +5,25 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
     <title>Menu - CLUB TWEE</title>
     <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
-    <meta name="description" content="Break-point Grimbergen: de broodjeszaak bij uitstek in Grimbergen waar je klassieke of 'speciale' belegde broodjes, slaatjes, warme focaccia, pasta boxen, en drankjes ter plaatse in onze cosy corner of op ons terras kan nuttigen.">
-    <meta name="keywords" content="Belegde broodjes, Grimbergen, focaccia, salades, special broodjes, afhalen, op ons terras, cosy corner, broodjeszaak">
+    <meta name="description" content="Club Twee Menu - Broodjes, Focaccia's, Salades en Dranken in Grimbergen">
     <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'club-bg': '#f8f5f2',
-                        'club-brown': '#8B4513',
-                        'club-pink': '#E91E63',
-                        'club-red': '#DC143C',
-                        'paper': '#fefdfb',
-                        'ink': '#2c1810',
+                        'menu-bg': '#E5E4E2',
+                        'menu-cream': '#f5f0e8',
+                        'menu-burgundy': '#580712',
+                        'menu-brown': '#3d2314',
                     },
                     fontFamily: {
                         'bebas': ['Bebas Neue', 'cursive'],
-                        'inter': ['Inter', 'sans-serif'],
                         'playfair': ['Playfair Display', 'serif'],
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'bounce-slow': 'bounce 2s infinite',
-                        'pulse-slow': 'pulse 3s infinite',
-                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
-                        'scale-in': 'scaleIn 0.8s ease-out forwards',
-                        'slide-in-left': 'slideInLeft 0.8s ease-out forwards',
-                        'slide-in-right': 'slideInRight 0.8s ease-out forwards',
-                        'gradient-shift': 'gradientShift 8s ease-in-out infinite',
-                        'text-glow': 'textGlow 2s ease-in-out infinite alternate',
-                        'paper-fold': 'paperFold 1.2s ease-out forwards',
+                        'inter': ['Inter', 'sans-serif'],
                     }
                 }
             }
@@ -47,512 +31,155 @@
     </script>
     
     <style>
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+        .font-bebas { font-family: 'Bebas Neue', sans-serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+        
+        .menu-card {
+            background: #f5f0e8;
+            border: 3px solid #580712;
+            border-radius: 8px;
         }
         
-        @keyframes fadeInUp {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        
-        @keyframes scaleIn {
-            0% { opacity: 0; transform: scale(0.95) translateY(20px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        
-        @keyframes slideInLeft {
-            0% { opacity: 0; transform: translateX(-50px); }
-            100% { opacity: 1; transform: translateX(0); }
-        }
-        
-        @keyframes slideInRight {
-            0% { opacity: 0; transform: translateX(50px); }
-            100% { opacity: 1; transform: translateX(0); }
-        }
-        
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        
-        @keyframes textGlow {
-            0% { text-shadow: 0 0 20px rgba(220, 20, 60, 0.3); }
-            100% { text-shadow: 0 0 30px rgba(220, 20, 60, 0.6); }
-        }
-        
-        @keyframes paperFold {
-            0% { 
-                opacity: 0;
-                transform: perspective(1000px) rotateX(-15deg) rotateY(5deg) scale(0.95);
-                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            }
-            100% { 
-                opacity: 1;
-                transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1);
-                box-shadow: 0 25px 80px rgba(0,0,0,0.15);
-            }
-        }
-
-        .gradient-text {
-            background: linear-gradient(135deg, #8B4513 0%, #E91E63 50%, #DC143C 100%);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientShift 4s ease-in-out infinite;
-        }
-
-        .glass-morphism {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .paper-menu {
-            background: linear-gradient(145deg, #fefdfb 0%, #f9f7f4 50%, #fefdfb 100%);
-            box-shadow: 
-                0 0 0 1px rgba(139, 69, 19, 0.1),
-                0 5px 15px rgba(0, 0, 0, 0.08),
-                0 15px 35px rgba(0, 0, 0, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.8);
-            border: 2px solid rgba(139, 69, 19, 0.15);
-            position: relative;
-            animation: paperFold 1.2s ease-out forwards;
-        }
-
-        .paper-menu::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(139, 69, 19, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(233, 30, 99, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 40% 80%, rgba(220, 20, 60, 0.03) 0%, transparent 50%);
-            pointer-events: none;
-            border-radius: inherit;
-        }
-
-        .menu-section {
-            border-bottom: 2px dashed rgba(139, 69, 19, 0.15);
-            position: relative;
-        }
-
-        .menu-section:last-child {
-            border-bottom: none;
-        }
-
         .menu-item {
-            border-bottom: 1px dotted rgba(139, 69, 19, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .menu-item:hover {
-            background: linear-gradient(90deg, rgba(233, 30, 99, 0.05) 0%, transparent 100%);
-            transform: translateX(5px);
-        }
-
-        .menu-item:last-child {
-            border-bottom: none;
-        }
-
-        .price-dots {
-            flex: 1;
-            height: 1px;
-            background: repeating-linear-gradient(
-                to right,
-                transparent 0px,
-                transparent 4px,
-                rgba(230, 7, 7, 0.726) 4px,
-                rgba(230, 7, 7, 0.726) 6px
-            );
-            margin: 0 10px;
-            align-self: flex-end;
-            margin-bottom: 4px;
-        }
-
-        .category-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #DC143C, #E91E63);
             display: flex;
-            align-items: center;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.25rem 0;
+        }
+        
+        .menu-item-name {
+            font-weight: 600;
+            color: #580712;
+        }
+        
+        .menu-item-desc {
+            font-size: 0.8rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        .menu-item-price {
+            font-weight: 700;
+            color: #580712;
+            white-space: nowrap;
+        }
+        
+        .dotted-line {
+            flex: 1;
+            border-bottom: 1px dotted #580712;
+            margin: 0 8px 4px 8px;
+            opacity: 0.4;
+        }
+        
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            color: #580712;
+            border-bottom: 2px solid #580712;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f5f0e8;
+            border-top: 3px solid #580712;
             border-radius: 50%;
-            box-shadow: 0 8px 25px rgba(220, 20, 60, 0.3);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
         }
-
-        .category-icon::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
-            transform: rotate(45deg);
-            transition: all 0.6s ease;
-            opacity: 0;
-        }
-
-        .category-icon:hover::before {
-            animation: shine 0.8s ease-in-out;
-            opacity: 1;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        .floating-shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.05;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .floating-shape:nth-child(odd) {
-            animation-direction: reverse;
-        }
-
-        .hero-bg {
-            background: linear-gradient(135deg, #f8f5f2 0%, #E91E63 50%, #8B4513 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 12s ease-in-out infinite;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #DC143C 0%, #E91E63 100%);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(220, 20, 60, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(220, 20, 60, 0.6);
-        }
-
-        .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.5s;
-        }
-
-        .btn-primary:hover::before {
-            left: 100%;
-        }
-
-        .loading-dots::after {
-            content: '';
-            animation: loadingDots 1.5s linear infinite;
-        }
-
-        @keyframes loadingDots {
-            0%, 20% { content: ''; }
-            40% { content: '.'; }
-            60% { content: '..'; }
-            80%, 100% { content: '...'; }
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #DC143C, #E91E63);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #E91E63, #8B4513);
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
-
-<body class="bg-club-bg overflow-x-hidden">
-    <!-- Mobile Menu Button -->
-    <div class="fixed top-4 left-4 z-50 md:hidden">
-        <button id="mobile-menu-btn" class="bg-club-brown text-white p-3 rounded-full shadow-lg hover:bg-opacity-80 transition-all duration-300 hover:scale-110">
-            <i class="fas fa-bars text-xl"></i>
-        </button>
-    </div>
-
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 bg-club-brown bg-opacity-95 z-40 transform -translate-x-full transition-transform duration-500 md:hidden">
-        <div class="flex flex-col items-center justify-center h-full text-white space-y-8">
-            <button id="close-menu" class="absolute top-6 right-6 text-3xl hover:text-club-pink transition-colors">
-                <i class="fas fa-times"></i>
-            </button>
-            <a href="./index.html" class="text-3xl font-bebas uppercase hover:text-club-pink transition-colors">Home</a>
-            <a href="menu.html" class="text-3xl font-bebas uppercase hover:text-club-pink transition-colors">Menu</a>
-            <a href="https://www.one2three.app/clubtwee/menu" class="text-2xl font-bebas uppercase bg-club-red px-6 py-3 rounded-full hover:bg-opacity-80 transition-all">Bestellen</a>
-        </div>
-    </div>
-
+<body class="bg-menu-bg min-h-screen">
     <!-- Header -->
-    <header class="relative z-30">
-        <nav class="py-4 bg-club-bg bg-opacity-90 backdrop-blur-sm sticky top-0 z-20">
-            <div class="container mx-auto px-4 flex justify-between items-center">
-                <a href="./index.html" class="mx-auto md:mx-0 animate-pulse-slow">
-                    <img src="./img/logo.png" alt="Club Twee Logo" class="w-32 md:w-48 h-auto hover:scale-105 transition-transform duration-300">
-                </a>
-                <a href="menu.html" class="hidden md:block text-club-brown font-bold text-xl lg:text-2xl uppercase underline decoration-2 hover:text-club-red hover:scale-105 transition-all duration-300">
-                    Menu Kaart
-                </a>
-            </div>
-        </nav>
+    <header class="bg-menu-cream border-b-4 border-menu-burgundy">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="./index.html" class="flex items-center gap-2">
+                <img src="./img/logo.png" alt="Club Twee Logo" class="w-24 md:w-32 h-auto">
+            </a>
+            <a href="https://www.one2three.app/clubtwee/menu" target="_blank" 
+               class="bg-menu-burgundy text-white px-5 py-2 rounded-full font-bebas uppercase text-lg hover:bg-menu-brown transition-colors">
+                Bestel Online
+            </a>
+        </div>
     </header>
 
-    <main class="relative z-10">
-        <!-- Hero Section -->
-        <div class="relative bg-gradient-to-br from-club-bg via-club-pink to-club-bg bg-repeat px-4 sm:px-6 lg:px-12 py-8 sm:py-12 lg:py-20" style="background-image: url('./img/illu-met-achtergrond-bovenaan-pagina.png');">
-                    <!-- Floating decorative elements -->
-                    <div class="absolute top-10 left-10 w-4 h-4 bg-club-red rounded-full animate-float opacity-60"></div>
-                    <div class="absolute top-1/3 right-20 w-6 h-6 bg-club-pink rounded-full animate-bounce-slow opacity-40"></div>
-                    <div class="absolute bottom-20 left-1/4 w-3 h-3 bg-club-brown rounded-full animate-pulse opacity-50"></div>
+    <!-- Main Title -->
+    <div class="bg-menu-cream py-8 text-center border-b-4 border-menu-burgundy">
+        <h1 class="font-bebas text-5xl md:text-7xl text-menu-burgundy tracking-wide">
+            CLUB TWEE<span class="font-playfair italic text-3xl md:text-4xl ml-2">Food & specials</span>
+        </h1>
+    </div>
 
-                    <div class="text-center">
-                        <h1 class="font-bebas text-4xl sm:text-5xl md:text-6xl lg:text-7xl uppercase leading-tight mb-6 text-club-brown gradient-text animate-fade-in-up">
-                            Onze Menu Kaart
-                        </h1>
-                        <p class="text-lg sm:text-xl lg:text-2xl text-club-red font-bebas uppercase animate-fade-in-up" style="animation-delay: 0.2s;">
-                            Vers • Lekker • Met liefde gemaakt
-                        </p>
-                        <div class="mt-8">
-                            <a href="https://www.one2three.app/clubtwee/menu" target="_blank" class="bg-club-red text-white px-8 py-4 rounded-full font-bebas uppercase text-xl hover:bg-club-brown transition-all duration-300 hover:scale-105 hover:shadow-lg">
-                                <i class="fas fa-shopping-cart mr-2"></i>Bestel Nu Online!
-                            </a>
-                        </div>
-                    </div>
-                </div>
+    <!-- Loading State -->
+    <div id="loading" class="container mx-auto px-4 py-16 text-center">
+        <div class="loading-spinner mx-auto mb-4"></div>
+        <p class="font-bebas text-xl text-menu-burgundy">Menu wordt geladen...</p>
+    </div>
 
-        <!-- Menu Section -->
-        <section class="py-12 md:py-20 relative">
-            <div class="container mx-auto px-6">
-                <!-- Loading Message -->
-                <div id="loading" class="text-center py-20">
-                    <div class="inline-flex items-center space-x-4">
-                        <div class="animate-spin rounded-full h-12 w-12 border-4 border-club-red border-t-transparent"></div>
-                        <p class="font-bebas text-3xl text-club-brown">
-                            Menu wordt geladen<span class="loading-dots"></span>
-                        </p>
-                    </div>
-                    <p class="text-club-brown mt-4 font-playfair italic">Even geduld, wij bereiden alles voor...</p>
-                </div>
-
-                <!-- Menu Paper -->
-                <div id="menu" class="paper-menu max-w-4xl mx-auto rounded-3xl p-8 md:p-12 hidden">
-                    <!-- Menu Header -->
-                    <div class="text-center mb-12 pb-8 border-b-2 border-club-brown border-opacity-20">
-                        <div class="mb-6">
-                            <div class="w-24 h-24 bg-club-brown rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                                <span class="font-bebas text-white text-2xl">CT</span>
-                            </div>
-                        </div>
-                        <h1 class="font-playfair text-4xl md:text-5xl font-bold text-ink mb-4">
-                            CLUB TWEE
-                        </h1>
-                        <p class="font-playfair text-lg italic text-club-brown">
-                            ~ Your Happy Place ~
-                        </p>
-                        <p class="text-sm text-club-brown mt-2">
-                            Beigemsesteenweg 2, 1850 Grimbergen • Tel: 02/270.95.46
-                        </p>
-                    </div>
-
-                    <!-- Menu Categories Container -->
-                    <div id="menu-categories" class="space-y-12">
-                        <!-- Categories will be populated by JavaScript -->
-                    </div>
-
-                    <!-- Menu Footer -->
-                    <div class="text-center mt-12 pt-8 border-t-2 border-club-brown border-opacity-20">
-                        <p class="font-playfair text-lg italic text-club-brown mb-4">
-                            "Alle gerechten worden vers bereid met lokale ingrediënten"
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                            <a href="https://www.one2three.app/clubtwee/menu" target="_blank" 
-                               class="btn-primary text-white px-8 py-3 rounded-2xl font-bebas uppercase text-lg inline-flex items-center space-x-2">
-                                <i class="fas fa-mobile-alt"></i>
-                                <span>Online Bestellen</span>
-                            </a>
-                            <a href="./pdf/Kaart-CLUB-TWEE.pdf" target="_blank" 
-                               class="border-2 border-club-brown text-club-brown px-8 py-3 rounded-2xl font-bebas uppercase text-lg hover:bg-club-brown hover:text-white transition-all duration-300 inline-flex items-center space-x-2">
-                                <i class="fas fa-download"></i>
-                                <span>Download PDF</span>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="bg-gradient-to-t from-club-brown to-gray-900 text-white py-12 sm:py-16 relative overflow-hidden">
-            <!-- Animated background -->
-            <div class="absolute inset-0 opacity-5">
-                <div class="absolute top-10 left-10 w-20 h-20 bg-club-pink rounded-full animate-float"></div>
-                <div class="absolute top-1/3 right-20 w-16 h-16 bg-club-red rounded-full animate-bounce-slow"></div>
-                <div class="absolute bottom-20 left-1/3 w-12 h-12 bg-yellow-400 rounded-full animate-pulse"></div>
-            </div>
-
-            <div class="container mx-auto px-4 relative z-10">
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 text-center lg:text-left">
-                    <div class="animate-fade-in-up">
-                        <div class="mb-6">
-                            <img src="./img/logo.png" alt="Club Twee Logo" class="w-24 sm:w-32 mx-auto lg:mx-0 mb-4 hover:scale-105 transition-transform duration-300">
-                            <h5 class="font-bebas text-xl sm:text-2xl uppercase mb-2 text-club-pink">
-                                <i class="fas fa-home mr-2"></i>CLUB TWEE
-                            </h5>
-                            <p class="text-gray-300 italic">Your happy place ✨</p>
-                        </div>
-                        <div class="space-y-2 text-sm sm:text-base">
-                            <p class="flex items-center justify-center lg:justify-start">
-                                <i class="fas fa-map-marker-alt mr-3 text-club-red"></i>
-                                Beigemsesteenweg 2, 1850 Grimbergen
-                            </p>
-                            <p>
-                                <a href="tel:+022709546" class="flex items-center justify-center lg:justify-start hover:text-club-pink transition-colors duration-300">
-                                    <i class="fas fa-phone mr-3 text-green-400"></i>
-                                    02/270.95.46
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="animate-fade-in-up" style="animation-delay: 0.1s;">
-                        <h5 class="font-bebas text-lg sm:text-xl uppercase mb-4 text-club-pink">
-                            <i class="fas fa-balance-scale mr-2"></i>Legal Shizzle
-                        </h5>
-                        <div class="space-y-3">
-                            <a href="https://clubtwee.be/index.php/privacy-cookies/" 
-                               class="block hover:text-club-pink transition-colors duration-300 hover:underline">
-                                <i class="fas fa-shield-alt mr-2"></i>Privacy & Cookies
-                            </a>
-                            <div class="text-sm text-gray-400">
-                                <p class="font-semibold">Ondernemingsnummer:</p>
-                                <p>1020.049.723</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="animate-fade-in-up" style="animation-delay: 0.2s;">
-                        <h5 class="font-bebas text-lg sm:text-xl uppercase mb-4 text-club-pink">
-                            <i class="fas fa-music mr-2"></i>Let's VIBE
-                        </h5>
-                        <div class="space-y-3">
-                            <a href="./pdf/Kaart-CLUB-TWEE.pdf" target="_blank"
-                               class="block bg-club-red hover:bg-club-pink text-white px-4 py-2 rounded-full transition-all duration-300 hover:scale-105">
-                                <i class="fas fa-utensils mr-2"></i>Menukaart
-                            </a>
-                            <a href="https://www.one2three.app/clubtwee/menu" target="_blank"
-                               class="block bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-full transition-all duration-300 hover:scale-105">
-                                <i class="fas fa-shopping-cart mr-2"></i>Online Bestellen
-                            </a>
-                            <a href="https://www.instagram.com/clubtwee/" target="_blank"
-                               class="block bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-full transition-all duration-300 hover:scale-105">
-                                <i class="fab fa-instagram mr-2"></i>Follow Us
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="animate-fade-in-up" style="animation-delay: 0.3s;">
-                        <h5 class="font-bebas text-lg sm:text-xl uppercase mb-4 text-club-pink">
-                            <i class="fas fa-clock mr-2"></i>Openingsuren
-                        </h5>
-                        <div class="space-y-2 text-sm sm:text-base">
-                            <div class="flex justify-center lg:justify-start items-center">
-                                <i class="fas fa-calendar-day mr-3 text-green-400"></i>
-                                <span class="font-semibold">Ma - Vr:</span>
-                                <span class="ml-2">8u30 – 17u</span>
-                            </div>
-                            <div class="flex justify-center lg:justify-start items-center">
-                                <i class="fas fa-calendar-week mr-3 text-blue-400"></i>
-                                <span class="font-semibold">Zaterdag:</span>
-                                <span class="ml-2">10h – 15u</span>
-                            </div>
-                            <div class="flex justify-center lg:justify-start items-center">
-                                <i class="fas fa-calendar-times mr-3 text-red-400"></i>
-                                <span class="font-semibold">Zondag:</span>
-                                <span class="ml-2">gesloten</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer bottom -->
-                <hr class="border-gray-600 my-8 sm:my-12">
-                <div class="text-center space-y-4">
-                    <div class="flex justify-center space-x-6 text-2xl">
-                        <a href="https://www.instagram.com/clubtwee/" target="_blank" 
-                           class="text-gray-400 hover:text-purple-400 transition-colors duration-300 hover:scale-110">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="tel:+022709546" 
-                           class="text-gray-400 hover:text-green-400 transition-colors duration-300 hover:scale-110">
-                            <i class="fas fa-phone"></i>
-                        </a>
-                        <a href="mailto:info@clubtwee.be" 
-                           class="text-gray-400 hover:text-blue-400 transition-colors duration-300 hover:scale-110">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                    </div>
-                    <p class="text-gray-400 text-sm sm:text-base">
-                        © 2025 <span class="font-bebas text-club-pink">CLUB TWEE</span> 
-                        - Made with <i class="fas fa-heart text-red-500 animate-pulse"></i> in Grimbergen
-                    </p>
-                </div>
-            </div>
-        </footer>
-
-        <!-- Floating Action Buttons -->
-        <div class="fixed bottom-6 right-6 z-40 flex flex-col space-y-3">
-            <a href="https://www.one2three.app/clubtwee/menu" target="_blank"
-               class="w-14 h-14 btn-primary text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300">
-                <i class="fas fa-shopping-cart text-lg"></i>
-            </a>
-            <a href="tel:+022709546"
-               class="w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300">
-                <i class="fas fa-phone text-lg"></i>
-            </a>
-            <a href="https://www.instagram.com/clubtwee/" target="_blank"
-               class="w-14 h-14 bg-purple-600 hover:bg-purple-700 text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300">
-                <i class="fab fa-instagram text-lg"></i>
-            </a>
-        </div>
-
-        <!-- Back to Top Button -->
-        <button id="back-to-top" 
-                class="fixed bottom-6 left-6 z-40 w-14 h-14 bg-club-brown hover:bg-club-red text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300 opacity-0 pointer-events-none">
-            <i class="fas fa-arrow-up text-lg"></i>
-        </button>
+    <!-- Menu Container -->
+    <main id="menu-container" class="container mx-auto px-4 py-8 max-w-7xl hidden">
+        <!-- Dynamic content will be loaded here -->
     </main>
+
+    <!-- Info Section (static) -->
+    <div id="info-section" class="container mx-auto px-4 pb-8 max-w-7xl hidden">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Sweet Treats & Info -->
+            <div class="menu-card p-6 text-center">
+                <h2 class="font-bebas text-3xl text-menu-burgundy mb-4">SWEET TREATS</h2>
+                <p class="text-gray-600 mb-6">Check de toonbank voor ons assortiment!</p>
+                
+                <div class="border-t-2 border-b-2 border-menu-burgundy border-opacity-30 py-4 my-4">
+                    <p class="font-bebas text-xl text-menu-burgundy">KEUKEN SLUIT OM 15:00</p>
+                </div>
+                
+                <p class="text-sm text-gray-600 mb-4">
+                    Vermijd de broodjesfile: plaats je bestelling online voor 11u en haal je broodje zonder stress en zonder wachten op.
+                </p>
+                <p class="font-semibold text-menu-burgundy mb-4">www.clubtwee.be</p>
+                <p class="text-sm text-gray-600">Volg ons op Instagram!</p>
+            </div>
+            
+            <!-- WiFi & Info -->
+            <div class="menu-card p-6 text-center flex flex-col justify-center">
+                <div class="mb-6">
+                    <p class="text-lg"><strong>WIFI:</strong> CLUBTWEE</p>
+                    <p class="text-lg"><strong>WACHTWOORD:</strong> CLUBTWEEOLE!</p>
+                </div>
+                <p class="font-bebas text-2xl text-menu-burgundy">BESTELLEN AAN DE BAR</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-menu-burgundy text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <img src="./img/logo.png" alt="Club Twee Logo" class="w-20 mx-auto mb-4 brightness-0 invert">
+            <p class="font-bebas text-2xl mb-2">CLUB TWEE</p>
+            <p class="text-sm opacity-80 mb-4">Beigemsesteenweg 2, 1850 Grimbergen</p>
+            <div class="flex justify-center gap-6 mb-4">
+                <a href="https://www.instagram.com/clubtwee/" target="_blank" class="hover:text-amber-400 transition-colors">
+                    <i class="fab fa-instagram text-2xl"></i>
+                </a>
+                <a href="tel:+022709546" class="hover:text-green-400 transition-colors">
+                    <i class="fas fa-phone text-2xl"></i>
+                </a>
+            </div>
+            <p class="text-sm opacity-60">© 2025 Club Twee - Your happy place</p>
+        </div>
+    </footer>
+
+    <!-- Firebase SDK -->
     <script type="module">
-        // Firebase configuration
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
+        // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyAqmesvJgvRnZHm1777niBFRBjj0P_SBT0",
             authDomain: "clubtwee-menu.firebaseapp.com",
@@ -562,508 +189,206 @@
             appId: "1:852997452508:web:763f2e7f820b5509da3a19"
         };
 
+        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Category icons mapping with brand icons
-        const categoryConfig = {
-            "Basics": { 
-                icon: "fa-solid fa-thumbs-up", 
-                emoji: "🥪",
-                description: "Onze klassiekers"
-            },
-            "salades": { 
-                icon: "fa-solid fa-leaf", // using leaf icon for salads
-                emoji: "🥗",
-                description: "Verse, gezonde salades"
-            },
-            "cocktails": { 
-                icon: "fa-solid fa-cocktail", // cocktail glass icon
-                emoji: "🍹",
-                description: "Verfrissende cocktails"
-            },
-            "drinks": { 
-                icon: "fa-solid fa-glass-water", // water glass icon
-                emoji: "🥤",
-                description: "Verfrissende dranken"
-            },
-            "wijnen": { 
-                icon: "fa-solid fa-wine-glass", // wine glass icon
-                emoji: "🍷",
-                description: "Onze selectie wijnen"
-            },
-            "zoet": { 
-                icon: "fa-solid fa-candy-cane", // candy cane for sweets
-                emoji: "🍬",
-                description: "Zoete lekkernijen"
-            },
-            "zandwich": { 
-                icon: "fa-solid fa-sandwich", // sandwich icon
-                emoji: "🥪",
-                description: "Heerlijke sandwiches allen op zaterdag beschikbaar!"
-            },
-            "bier":{
-                icon: "fa-solid fa-beer", // beer icon for beer category
-                emoji: "🍺",
-                description: "Onze selectie bieren"
-            },
-            "Desserts": { 
-                icon: "fab fa-bitcoin", // creative use as it looks like a sweet treat
-                emoji: "🍰",
-                description: "Zoete verrassingen"
-            },
-            "broodjes": { 
-                emoji: "☕",
-                description: "Onze klassieke belegde broodjes",
-                svg : `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-11 0 50 22" width="512" height="512"> <path fill="white" d="M21,18H3a3,3,0,0,0,0,6H21A3,3,0,0,0,21,18Zm0,4H3a1,1,0,0,1,0-2H21A1,1,0,0,1,21,22ZM22.8,5.374,19.687,1.747a4.97,4.97,0,0,0-5.8-1.328L3,5.184A5,5,0,0,0,0,9.765,3.024,3.024,0,0,0,3,13H21a3,3,0,0,0,3-3A6.169,6.169,0,0,0,22.8,5.374ZM14.688,2.251a2.987,2.987,0,0,1,3.48.8c.092.126,3.395,3.909,3.341,3.952H3.834ZM22,10a1,1,0,0,1-1,1H3C1.949,11,1.861,9.776,2.105,9H22Zm2,6a.99.99,0,0,1-1.584.79l-.011.014c-.386-.255-1.284-1.224-1.96-.638a4.011,4.011,0,0,1-4.889,0,.944.944,0,0,0-1.111,0,4.061,4.061,0,0,1-4.889,0,.942.942,0,0,0-1.111,0,4.061,4.061,0,0,1-4.889,0c-.67-.589-1.589.389-1.961.637l-.011-.014A.982.982,0,0,1,.416,15.21L.405,15.2s.573-.423.816-.612a2.946,2.946,0,0,1,3.558,0,2.031,2.031,0,0,0,2.443,0,2.946,2.946,0,0,1,3.557,0,2.031,2.031,0,0,0,2.443,0,2.946,2.946,0,0,1,3.557,0,2.031,2.031,0,0,0,2.443,0,2.946,2.946,0,0,1,3.557,0c.243.189.815.611.816.612l-.011.014A.982.982,0,0,1,24,16Z"/> </svg>`
-            },
-            "focaccia": { 
-                icon: "fa-solid fa-bread-slice", // circular like focaccia
-                emoji: "🍕",
-                description: "Warme, verse focaccia"
-            },
-            "Specials": { 
-                icon: "fab fa-superpowers", 
-                emoji: "⭐",
-                description: "Onze chef's specials"
-            }
-        };
+        // Category display order (customize as needed)
+        const categoryOrder = [
+            'Basics',
+            'Specials', 
+            'Focaccias',
+            "Focaccia's",
+            'Salades',
+            'Food Specials',
+            'Pick & Plate',
+            'Yoghurt Bowl',
+            'Koffie',
+            'Iets Anders',
+            'Thee',
+            'Fris',
+            'Bier',
+            'Cocktails',
+            'Wijnen'
+        ];
 
-        async function displayMenu() {
-            const menuContainer = document.getElementById("menu");
-            const menuCategoriesContainer = document.getElementById("menu-categories");
-            const loadingContainer = document.getElementById("loading");
+        // Food categories (for layout purposes)
+        const foodCategories = ['Basics', 'Specials', 'Focaccias', "Focaccia's", 'Salades', 'Food Specials', 'Pick & Plate', 'Yoghurt Bowl'];
+        const drinkCategories = ['Koffie', 'Iets Anders', 'Thee', 'Fris', 'Bier', 'Cocktails', 'Wijnen'];
+
+        // Format price
+        function formatPrice(price) {
+            return parseFloat(price).toFixed(2).replace('.', ',');
+        }
+
+        // Create menu item HTML
+        function createMenuItem(name, data) {
+            const hasDescription = data.description && data.description.trim() !== '';
             
-            try {
-                menuCategoriesContainer.innerHTML = "";
-                
-                const categoriesSnapshot = await getDocs(collection(db, "menus"));
-                let animationDelay = 0;
+            return `
+                <div class="mb-2">
+                    <div class="menu-item">
+                        <span class="menu-item-name">${name}</span>
+                        <span class="dotted-line"></span>
+                        <span class="menu-item-price">${formatPrice(data.price)}</span>
+                    </div>
+                    ${hasDescription ? `<p class="menu-item-desc">${data.description}</p>` : ''}
+                </div>
+            `;
+        }
 
-                for (let categoryDoc of categoriesSnapshot.docs) {
-                    const categoryName = categoryDoc.id;
-                    const config = categoryConfig[categoryName] || categoryConfig["Basics"];
-                    const itemsSnapshot = await getDocs(collection(db, `menus/${categoryName}/items`));
-                    let iconHTML = "";
-                        if (config.icon) {
-                        // Si c’est une classe Font Awesome
-                        iconHTML = `<i class="${config.icon} text-2xl text-white"></i>`;
-                        } else if (config.svg) {
-                        // Si c’est un SVG inline
-                        iconHTML = `${config.svg}`;
-                        }
-
-                    let itemsHTML = "";
-                    itemsSnapshot.forEach(itemDoc => {
-                        const data = itemDoc.data();
-                        itemsHTML += `
-                            <div class="menu-item flex items-end justify-between py-4 px-2 hover:bg-club-pink hover:bg-opacity-5 rounded-lg transition-all duration-300 group">
-                                <div class="flex-1">
-                                    <h4 class="font-medium text-ink group-hover:text-club-red transition-colors duration-300 text-base md:text-lg">
-                                        ${itemDoc.id}
-                                    </h4>
-                                    ${data.description ? `
-                                        <p class="text-sm text-gray-500 mt-1 group-hover:text-ink transition-colors duration-300">
-                                            ${data.description}
-                                        </p>
-                                    ` : ""}
-                                </div>
-                                <div class="price-dots"></div>
-                                <div class="flex-shrink-0">
-                                    <span class="font-bebas text-xl md:text-2xl font-bold text-club-red bg-club-red bg-opacity-10 px-3 py-1 rounded-full group-hover:bg-opacity-20 transition-all duration-300">
-                                        €${data.price}
-                                    </span>
-                                </div>
-                            </div>
-                        `;
-                    });
-
-                    const sectionHTML = `
-                    <section class="menu-section pb-8 mb-8 animate-fade-in-up">
-                        <div class="flex items-center mb-8">
-                        <div class="category-icon mr-6">
-                            ${iconHTML}
-                        </div>
-                        <div class="flex-1">
-                            <div class="flex items-center gap-3 mb-2">
-                            <h2 class="font-playfair text-3xl md:text-4xl font-bold text-ink">
-                                ${categoryName}
-                            </h2>
-                            <span class="text-3xl">${config.emoji}</span>
-                            </div>
-                            <p class="font-playfair italic text-club-brown text-sm md:text-base">
-                            ${config.description}
-                            </p>
-                        </div>
-                        </div>
-                        <div class="grid gap-1">
+        // Create category card HTML
+        function createCategoryCard(categoryName, items) {
+            const itemsHTML = items.map(item => createMenuItem(item.name, item.data)).join('');
+            
+            return `
+                <div class="menu-card p-6">
+                    <h2 class="section-title text-2xl md:text-3xl">${categoryName.toUpperCase()}</h2>
+                    <div class="space-y-1">
                         ${itemsHTML}
-                        </div>
-                    </section>
-                    `;
+                    </div>
+                </div>
+            `;
+        }
 
-                    menuCategoriesContainer.innerHTML += sectionHTML;
-                    animationDelay++;
+        // Check if category is food or drink
+        function isFoodCategory(cat) {
+            return foodCategories.some(fc => fc.toLowerCase() === cat.toLowerCase());
+        }
+        
+        function isDrinkCategory(cat) {
+            return drinkCategories.some(dc => dc.toLowerCase() === cat.toLowerCase());
+        }
+
+        // Load menu from Firebase
+        async function loadMenu() {
+            try {
+                const menuContainer = document.getElementById('menu-container');
+                const loading = document.getElementById('loading');
+                const infoSection = document.getElementById('info-section');
+                
+                // Get all categories
+                const categoriesSnap = await getDocs(collection(db, 'menus'));
+                const categories = {};
+                
+                // Load items for each category
+                for (const catDoc of categoriesSnap.docs) {
+                    const catName = catDoc.id;
+                    const itemsSnap = await getDocs(collection(db, `menus/${catName}/items`));
+                    
+                    if (!itemsSnap.empty) {
+                        categories[catName] = [];
+                        itemsSnap.forEach(itemDoc => {
+                            categories[catName].push({
+                                name: itemDoc.id,
+                                data: itemDoc.data()
+                            });
+                        });
+                        
+                        // Sort items by name
+                        categories[catName].sort((a, b) => a.name.localeCompare(b.name));
+                    }
                 }
 
-                // Show menu with paper fold animation
-                setTimeout(() => {
-                    loadingContainer.classList.add('hidden');
-                    menuContainer.classList.remove('hidden');
+                // Sort categories according to order
+                const sortedCategories = Object.keys(categories).sort((a, b) => {
+                    const indexA = categoryOrder.findIndex(c => c.toLowerCase() === a.toLowerCase());
+                    const indexB = categoryOrder.findIndex(c => c.toLowerCase() === b.toLowerCase());
+                    if (indexA === -1 && indexB === -1) return a.localeCompare(b);
+                    if (indexA === -1) return 1;
+                    if (indexB === -1) return -1;
+                    return indexA - indexB;
+                });
+
+                // Separate food and drinks
+                const foodCats = sortedCategories.filter(cat => isFoodCategory(cat));
+                const drinkCats = sortedCategories.filter(cat => isDrinkCategory(cat));
+                const otherCats = sortedCategories.filter(cat => !isFoodCategory(cat) && !isDrinkCategory(cat));
+
+                // Build HTML
+                let html = '';
+
+                // Food Section
+                const allFoodCats = [...foodCats, ...otherCats];
+                if (allFoodCats.length > 0) {
+                    html += `<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">`;
                     
-                    // Add stagger animation to menu items
-                    const menuItems = document.querySelectorAll('.menu-item');
-                    menuItems.forEach((item, index) => {
-                        setTimeout(() => {
-                            item.style.opacity = '1';
-                            item.style.transform = 'translateX(0)';
-                        }, index * 50);
+                    // Left column (even indices)
+                    html += `<div class="space-y-8">`;
+                    allFoodCats.forEach((cat, i) => {
+                        if (i % 2 === 0) {
+                            html += createCategoryCard(cat, categories[cat]);
+                        }
                     });
-                }, 800);
+                    html += `</div>`;
+                    
+                    // Right column (odd indices)
+                    html += `<div class="space-y-8">`;
+                    allFoodCats.forEach((cat, i) => {
+                        if (i % 2 === 1) {
+                            html += createCategoryCard(cat, categories[cat]);
+                        }
+                    });
+                    html += `</div>`;
+                    
+                    html += `</div>`;
+                }
+
+                // Drinks Section
+                if (drinkCats.length > 0) {
+                    html += `
+                        <div class="mb-8">
+                            <div class="bg-menu-cream py-6 text-center border-y-4 border-menu-burgundy mb-8">
+                                <h1 class="font-bebas text-4xl md:text-6xl text-menu-burgundy tracking-wide">
+                                    CLUB TWEE<span class="font-playfair italic text-2xl md:text-3xl ml-2">Drinks</span>
+                                </h1>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    `;
+                    
+                    drinkCats.forEach(cat => {
+                        html += createCategoryCard(cat, categories[cat]);
+                    });
+                    
+                    html += `</div></div>`;
+                }
+
+                // Check if we have any content
+                if (Object.keys(categories).length === 0) {
+                    html = `
+                        <div class="text-center py-16">
+                            <i class="fas fa-utensils text-6xl text-menu-burgundy opacity-30 mb-4"></i>
+                            <p class="font-bebas text-2xl text-menu-burgundy">Geen menu items gevonden</p>
+                            <p class="text-gray-600">Het menu wordt binnenkort bijgewerkt.</p>
+                        </div>
+                    `;
+                }
+
+                // Update DOM
+                menuContainer.innerHTML = html;
+                
+                // Hide loading, show content
+                loading.classList.add('hidden');
+                menuContainer.classList.remove('hidden');
+                infoSection.classList.remove('hidden');
 
             } catch (error) {
-                console.error("Erreur lors du chargement du menu:", error);
-                loadingContainer.innerHTML = `
-                    <div class="text-center py-20">
-                        <div class="w-24 h-24 bg-club-red bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-8 animate-pulse">
-                            <i class="fas fa-exclamation-triangle text-4xl text-club-red"></i>
-                        </div>
-                        <h3 class="font-playfair text-3xl md:text-4xl text-ink mb-4 font-bold">
-                            Oeps! Iets ging mis...
-                        </h3>
-                        <p class="text-club-brown mb-8 max-w-md mx-auto font-playfair italic">
-                            Het menu kan momenteel niet worden geladen. Geen zorgen, download onze PDF menu of bel ons direct!
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                            <a href="./pdf/Kaart-CLUB-TWEE.pdf" target="_blank" 
-                               class="btn-primary text-white px-8 py-4 rounded-2xl font-bebas uppercase text-lg inline-flex items-center space-x-2 justify-center">
-                                <i class="fas fa-download"></i>
-                                <span>Download PDF Menu</span>
-                            </a>
-                            <a href="tel:+022709546" 
-                               class="border-2 border-club-brown text-club-brown px-8 py-4 rounded-2xl font-bebas uppercase text-lg hover:bg-club-brown hover:text-white transition-all duration-300 inline-flex items-center space-x-2 justify-center">
-                                <i class="fas fa-phone"></i>
-                                <span>Bel Ons Direct</span>
-                            </a>
-                        </div>
+                console.error('Error loading menu:', error);
+                document.getElementById('loading').innerHTML = `
+                    <div class="text-center">
+                        <i class="fas fa-exclamation-triangle text-4xl text-menu-burgundy mb-4"></i>
+                        <p class="font-bebas text-xl text-menu-burgundy">Fout bij het laden van het menu</p>
+                        <p class="text-gray-600 mt-2">Probeer de pagina te vernieuwen</p>
+                        <button onclick="location.reload()" class="mt-4 bg-menu-burgundy text-white px-6 py-2 rounded-full font-bebas">
+                            Opnieuw proberen
+                        </button>
                     </div>
                 `;
             }
         }
 
-        // Enhanced mobile menu functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const closeMenuBtn = document.getElementById('close-menu');
-            const backToTopBtn = document.getElementById('back-to-top');
-
-            // Mobile menu toggle
-            mobileMenuBtn?.addEventListener('click', () => {
-                mobileMenu.classList.remove('-translate-x-full');
-                document.body.style.overflow = 'hidden';
-            });
-
-            closeMenuBtn?.addEventListener('click', () => {
-                mobileMenu.classList.add('-translate-x-full');
-                document.body.style.overflow = 'auto';
-            });
-
-            // Close mobile menu when clicking outside
-            mobileMenu?.addEventListener('click', (e) => {
-                if (e.target === mobileMenu) {
-                    mobileMenu.classList.add('-translate-x-full');
-                    document.body.style.overflow = 'auto';
-                }
-            });
-
-            // Enhanced scroll effects
-            let lastScrollTop = 0;
-            const header = document.querySelector('nav');
-            
-            window.addEventListener('scroll', () => {
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
-                // Back to top button
-                if (scrollTop > 500) {
-                    backToTopBtn.classList.remove('opacity-0', 'pointer-events-none');
-                } else {
-                    backToTopBtn.classList.add('opacity-0', 'pointer-events-none');
-                }
-
-                // Header hide/show on scroll
-                if (scrollTop > lastScrollTop && scrollTop > 100) {
-                    header.style.transform = 'translateY(-100%)';
-                } else {
-                    header.style.transform = 'translateY(0)';
-                }
-                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-
-                // Parallax effect for floating shapes
-                const shapes = document.querySelectorAll('.floating-shape');
-                shapes.forEach((shape, index) => {
-                    const speed = 0.1 + (index * 0.05);
-                    shape.style.transform = `translateY(${scrollTop * speed}px)`;
-                });
-            });
-
-            // Smooth scroll to top
-            backToTopBtn?.addEventListener('click', () => {
-                window.scrollTo({ 
-                    top: 0, 
-                    behavior: 'smooth' 
-                });
-            });
-
-            // Add intersection observer for animations
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, observerOptions);
-
-            // Observe menu sections after they're loaded
-            setTimeout(() => {
-                const menuSections = document.querySelectorAll('.menu-section');
-                menuSections.forEach(section => {
-                    observer.observe(section);
-                });
-            }, 1000);
-
-            // Add ripple effect to clickable elements
-            const clickables = document.querySelectorAll('.btn-primary, .menu-item, .category-icon');
-            clickables.forEach(element => {
-                element.addEventListener('click', function(e) {
-                    if (!this.querySelector('.ripple')) {
-                        const ripple = document.createElement('span');
-                        const rect = this.getBoundingClientRect();
-                        const size = Math.max(rect.width, rect.height);
-                        const x = e.clientX - rect.left - size / 2;
-                        const y = e.clientY - rect.top - size / 2;
-                        
-                        ripple.style.cssText = `
-                            position: absolute;
-                            width: ${size}px;
-                            height: ${size}px;
-                            left: ${x}px;
-                            top: ${y}px;
-                            background: rgba(255, 255, 255, 0.3);
-                            border-radius: 50%;
-                            transform: scale(0);
-                            animation: ripple-animation 0.6s linear;
-                            pointer-events: none;
-                        `;
-                        ripple.classList.add('ripple');
-                        
-                        this.style.position = 'relative';
-                        this.style.overflow = 'hidden';
-                        this.appendChild(ripple);
-                        
-                        setTimeout(() => {
-                            ripple.remove();
-                        }, 600);
-                    }
-                });
-            });
-
-            // Add hover sound effect simulation (visual feedback)
-            const menuItems = document.querySelectorAll('.menu-item');
-            menuItems.forEach(item => {
-                item.addEventListener('mouseenter', () => {
-                    item.style.transform = 'translateX(8px) scale(1.02)';
-                });
-                
-                item.addEventListener('mouseleave', () => {
-                    item.style.transform = 'translateX(0) scale(1)';
-                });
-            });
-
-            // Enhanced category icon interactions
-            const categoryIcons = document.querySelectorAll('.category-icon');
-            categoryIcons.forEach(icon => {
-                icon.addEventListener('mouseenter', () => {
-                    icon.style.transform = 'scale(1.15) rotate(10deg)';
-                    icon.style.boxShadow = '0 15px 40px rgba(220, 20, 60, 0.5)';
-                });
-                
-                icon.addEventListener('mouseleave', () => {
-                    icon.style.transform = 'scale(1) rotate(0deg)';
-                    icon.style.boxShadow = '0 8px 25px rgba(220, 20, 60, 0.3)';
-                });
-            });
-
-            // Add typing animation to loading text
-            const loadingText = document.querySelector('.loading-dots');
-            if (loadingText) {
-                let dots = 0;
-                const maxDots = 3;
-                setInterval(() => {
-                    if (document.getElementById('loading').classList.contains('hidden')) return;
-                    dots = (dots + 1) % (maxDots + 1);
-                    loadingText.textContent = 'Menu wordt geladen' + '.'.repeat(dots);
-                }, 500);
-            }
-
-            // Add paper texture animation on scroll
-            const paperMenu = document.querySelector('.paper-menu');
-            if (paperMenu) {
-                window.addEventListener('scroll', () => {
-                    const scrolled = window.pageYOffset;
-                    const rate = scrolled * -0.02;
-                    paperMenu.style.transform = `perspective(1000px) rotateX(${Math.max(-5, rate)}deg)`;
-                });
-            }
-        });
-
-        // Initialize menu
-        displayMenu();
-
-        // Add dynamic greeting based on time
-        const now = new Date();
-        const hour = now.getHours();
-        let greeting = "Welkom";
-        
-        if (hour < 12) {
-            greeting = "Goedemorgen";
-        } else if (hour < 18) {
-            greeting = "Goedemiddag";
-        } else {
-            greeting = "Goedenavond";
-        }
-
-        // Update page title with dynamic greeting
-        setTimeout(() => {
-            if (!document.getElementById('menu').classList.contains('hidden')) {
-                const heroTitle = document.querySelector('h1');
-                if (heroTitle) {
-                    heroTitle.innerHTML = `${greeting}<br><span class="text-3xl md:text-5xl">Menu Kaart</span>`;
-                }
-            }
-        }, 2000);
-
-        // Add periodic color theme updates
-        let themeIndex = 0;
-        const themes = [
-            { primary: '#DC143C', secondary: '#E91E63', accent: '#8B4513' },
-            { primary: '#8B4513', secondary: '#DC143C', accent: '#E91E63' },
-            { primary: '#E91E63', secondary: '#8B4513', accent: '#DC143C' }
-        ];
-        
-        setInterval(() => {
-            themeIndex = (themeIndex + 1) % themes.length;
-            const theme = themes[themeIndex];
-            document.documentElement.style.setProperty('--primary-color', theme.primary);
-            document.documentElement.style.setProperty('--secondary-color', theme.secondary);
-            document.documentElement.style.setProperty('--accent-color', theme.accent);
-        }, 10000);
-
-        function updateStatus() {
-            const now = new Date();
-            const day = now.getDay(); // 0 = Sunday, 1 = Monday, etc.
-            const hour = now.getHours();
-            const minute = now.getMinutes();
-            const currentTime = hour + (minute / 60);
-
-            const statusIndicator = document.getElementById('status-indicator');
-            const statusText = document.getElementById('status-text');
-
-            let isOpen = false;
-
-            if (day >= 1 && day <= 5) { // Monday to Friday
-                if (currentTime >= 8.5 && currentTime < 17) { // 8:30 to 17:00
-                    isOpen = true;
-                }
-            } else if (day === 6) { // Saturday
-                if (currentTime >= 10 && currentTime < 15) { // 10:00 to 15:00
-                    isOpen = true;
-                }
-            }
-
-            if (isOpen) {
-                statusIndicator.className = 'w-3 h-3 rounded-full mr-2 animate-pulse bg-green-500';
-                statusText.textContent = 'Nu Open!';
-                statusText.className = 'text-sm font-semibold text-green-400';
-            } else {
-                statusIndicator.className = 'w-3 h-3 rounded-full mr-2 animate-pulse bg-red-500';
-                statusText.textContent = 'Gesloten';
-                statusText.className = 'text-sm font-semibold text-red-400';
-            }
-        }
-
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all animated elements
-        document.querySelectorAll('[class*="animate-"]').forEach(el => {
-            el.style.animationPlayState = 'paused';
-            observer.observe(el);
-        });
-
         // Initialize
-        document.getElementById('date').textContent = getNextSecondFriday();
-        updateStatus();
-        
-        // Update status every minute
-        setInterval(updateStatus, 60000);
-
-        // Parallax effect for hero section
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.parallax');
-            
-            parallaxElements.forEach(element => {
-                const speed = element.dataset.speed || 0.5;
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
-
-        // Add some interactive particles effect
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'fixed pointer-events-none z-0';
-            particle.style.width = Math.random() * 6 + 2 + 'px';
-            particle.style.height = particle.style.width;
-            particle.style.background = Math.random() > 0.5 ? '#ffa6c9' : '#ff2400';
-            particle.style.borderRadius = '50%';
-            particle.style.opacity = Math.random() * 0.5 + 0.1;
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.top = window.innerHeight + 'px';
-            
-            document.body.appendChild(particle);
-            
-            const animation = particle.animate([
-                { transform: 'translateY(0px) rotate(0deg)', opacity: particle.style.opacity },
-                { transform: `translateY(-${window.innerHeight + 100}px) rotate(360deg)`, opacity: 0 }
-            ], {
-                duration: Math.random() * 3000 + 2000,
-                easing: 'linear'
-            });
-            
-            animation.onfinish = () => particle.remove();
-        }
-
-        // Create particles occasionally
-        setInterval(createParticle, 3000);
-
+        document.addEventListener('DOMContentLoaded', loadMenu);
     </script>
 </body>
 </html>

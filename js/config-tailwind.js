@@ -1,12 +1,6 @@
 tailwind.config = {
             theme: {
                 extend: {
-                    colors: {
-                        'club-brown': '#3d0c02',
-                        'club-bg': '#edeae0',
-                        'club-red': '#ff2400',
-                        'club-pink': '#ffa6c9'
-                    },
                     fontFamily: {
                         'bebas': ['Bebas Neue', 'sans-serif']
                     },

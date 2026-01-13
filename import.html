@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Import Menu Data - Club Twee</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .log-success { color: #22c55e; }
+        .log-error { color: #ef4444; }
+        .log-info { color: #3b82f6; }
+        .log-warning { color: #f59e0b; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen p-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">
+                <i class="fas fa-database mr-3 text-blue-500"></i>
+                Import Menu Data
+            </h1>
+            <p class="text-gray-600 mb-6">Club Twee - Firestore Import Script</p>
+            
+            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                <p class="text-yellow-800">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    <strong>Attention:</strong> Ce script va supprimer toutes les données existantes et les remplacer par les nouvelles données.
+                </p>
+            </div>
+
+            <div class="flex gap-4 mb-6">
+                <button id="btn-import" onclick="startImport()" 
+                    class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                    <i class="fas fa-upload mr-2"></i>
+                    Start Import
+                </button>
+                <button id="btn-clear" onclick="clearAll()" 
+                    class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
+                    <i class="fas fa-trash mr-2"></i>
+                    Clear All Data
+                </button>
+            </div>
+
+            <div class="mb-4">
+                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                    <span>Progress</span>
+                    <span id="progress-text">0%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-4">
+                    <div id="progress-bar" class="bg-blue-500 h-4 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+            <h2 class="text-xl font-bold text-gray-800 mb-4">
+                <i class="fas fa-terminal mr-2"></i>
+                Log
+            </h2>
+            <div id="log" class="bg-gray-900 text-gray-100 rounded-lg p-4 h-96 overflow-y-auto font-mono text-sm">
+                <p class="text-gray-400">En attente du démarrage...</p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, doc, getDocs, setDoc, deleteDoc, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAqmesvJgvRnZHm1777niBFRBjj0P_SBT0",
+            authDomain: "clubtwee-menu.firebaseapp.com",
+            projectId: "clubtwee-menu",
+            storageBucket: "clubtwee-menu.firebasestorage.app",
+            messagingSenderId: "852997452508",
+            appId: "1:852997452508:web:763f2e7f820b5509da3a19"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // ============================================
+        // MENU DATA - All items to import
+        // ============================================
+        const menuData = {
+            "Basics": {
+                items: [
+                    { name: "Kaas", price: 4.00, description: "" },
+                    { name: "Brie", price: 5.00, description: "" },
+                    { name: "Kaas-beenham", price: 5.00, description: "" },
+                    { name: "Huisbereide americain", price: 5.00, description: "" },
+                    { name: "Rosbief", price: 6.00, description: "" },
+                    { name: "Beenham", price: 4.50, description: "" },
+                    { name: "Parmaham", price: 5.00, description: "" },
+                    { name: "Huisbereid balleke", price: 5.00, description: "" },
+                    { name: "Kip curry", price: 4.50, description: "" },
+                    { name: "Gegrilde kipfilet", price: 5.00, description: "" },
+                    { name: "Vers gepaneerde kip", price: 6.00, description: "" },
+                    { name: "Scampi looksaus", price: 6.00, description: "" },
+                    { name: "Gerookte zalm", price: 6.00, description: "" },
+                    { name: "Huisbereide tonijnsla", price: 5.00, description: "" },
+                    { name: "Huisbereide tonijn pikant", price: 4.50, description: "" },
+                    { name: "Huisbereide surimisla", price: 4.50, description: "" }
+                ]
+            },
+            "Extra Opties": {
+                items: [
+                    { name: "+ Smos", price: 1.20, description: "" },
+                    { name: "+ Extra saus", price: 0.50, description: "" },
+                    { name: "+ Bruin brood", price: 0.50, description: "" },
+                    { name: "+ 30 cm", price: 1.00, description: "" }
+                ]
+            },
+            "Specials": {
+                items: [
+                    { name: "Broodje Club Twee", price: 6.50, description: "Vers gepaneerde kip, crispy bacon, kaas, sla, tomaat, komkommer, maïs, C2-saus" },
+                    { name: "Broodje Giant", price: 6.50, description: "Huisbereid balleke, kaas, ijsbergsla, augurk, gefrituurde ajuin, giantsaus" },
+                    { name: "Broodje Hawaï", price: 6.00, description: "Huisbereide tonijn, ijsbergsla, tomaat, ananas, cocktailsaus, kruiden" },
+                    { name: "Chicken cheese BBQ", price: 6.50, description: "Gegrilde kip, kaas, crispy bacon, gemengde sla, ajuin, BBQ-saus, kruiden" },
+                    { name: "Healthy Club Twee", price: 6.00, description: "Hummus, gegrilde courgette, zongedroogde tomaat, veldsla, balsamico" },
+                    { name: "Smos Club Twee", price: 6.00, description: "Beenham, breydelspek, kaas, tomaat, sla, rode ui, mosterdmayo" },
+                    { name: "Martino", price: 5.50, description: "Americain, ajuin, augurk, martinosaus" },
+                    { name: "Americain Club Twee", price: 6.00, description: "Americain, rucola, parmezaan, tomaat, mayo, kruiden, gemalen peper" },
+                    { name: "Italiaans", price: 7.00, description: "Parmaham, mozzarella, rode pesto, olijfolie, parmezaan, zongedroogde tomaat" },
+                    { name: "Mozza", price: 5.50, description: "Mozzarella, tomaat, rucola, groene pesto, kruiden, gemalen peper, balsamico" },
+                    { name: "Beef Club Twee", price: 6.50, description: "Rosbief, parmezaan, zongedroogde tomaat, rode pesto, kruiden, gemalen peper" },
+                    { name: "Beef Black Pepper", price: 6.50, description: "Rosbief, rucola, tomaat, parmezaan, 3 pepersaus, kruiden, gemalen peper" },
+                    { name: "Kip Club Twee", price: 6.00, description: "Gegrilde kipfilet, perzik, tuinkers, kruiden, gemalen peper, cocktail saus" },
+                    { name: "Kip Caesar", price: 6.00, description: "Gegrilde kip, breydelspek, tomaat, ijsbergsla, rode ui, caeserdressing, parmezaan" },
+                    { name: "Balleke Special", price: 5.50, description: "Balleke, ui, ketchup, currypoeder, mayo, tuinkers, tomaat" },
+                    { name: "Balleke Club Twee", price: 6.00, description: "Balleke, gesmolten kaas, saus naar keuze" },
+                    { name: "Smokey Salmon", price: 6.50, description: "Gerookte zalm, ui, peterselie, roomkaas" },
+                    { name: "Smokey Club Twee", price: 7.00, description: "Gerookte zalm, ui, peterselie, mosterd-dille dressing" },
+                    { name: "Brie Special", price: 6.00, description: "Brie, honing, walnoten, rucola" },
+                    { name: "Brie Club Twee", price: 6.00, description: "Brie, breydelspek, appel, luikse stroop, tuinkers" },
+                    { name: "Mexicano", price: 6.00, description: "Mexicano, saus naar keuze, augurken, gefrituurde ajuin" },
+                    { name: "Hamburger", price: 6.00, description: "Hamburger, saus naar keuze, augurken, gefrituurde ajuin" }
+                ]
+            },
+            "Focaccia's": {
+                items: [
+                    { name: "Italiaans", price: 9.00, description: "Rode pesto, mozzarella, parmaham, rucola, tomaat, parmezaanse kaas, kruiden" },
+                    { name: "Kip", price: 9.50, description: "Rode pesto, kip, mozzarella, rucola, zongedroogde tomaat, parmezaanse kaas, pijnboompitten" },
+                    { name: "Brie", price: 9.00, description: "Brie, honing, walnoten, rucola" },
+                    { name: "Balleke", price: 9.00, description: "C2-saus, mozzarella, balleke" },
+                    { name: "Gerookte zalm", price: 10.00, description: "Zalm, roomkaas, rode ajuin, rucola" }
+                ]
+            },
+            "Salades": {
+                items: [
+                    { name: "Caesarsalade", price: 15.00, description: "Ijsbergsla, tomaat, komkommer, ei, rode ui, gebraden kip, bacon, parmezaanse kaas, croutons, dressing" },
+                    { name: "Italiaanse salade", price: 16.00, description: "Ijsbergsla, rucola, tomaat, komkommer, serranoham, mozzarella, gedroogde tomaatjes, courgette, groene pesto, parmezaanse kaas, pijnboompitten" },
+                    { name: "Gerookte zalm salade", price: 16.00, description: "Ijsbergsla, komkommer, tomaat, rode ui, zalm, croutons, peterselie, dressing" },
+                    { name: "Niçoise salade", price: 15.00, description: "Ijsbergsla, tomaat, komkommer, boontjes, rode ui, tonijn, kappertjes, anchovis, croutons, dressing" },
+                    { name: "Veggie salade", price: 12.00, description: "Sla rucola, komkommer, tomaten, boontjes, tuinkers, rode ui, ei, courgette, croutons, dressing" }
+                ]
+            },
+            "Food Specials": {
+                items: [
+                    { name: "Tuna melt sandwich", price: 14.00, description: "Huisbereide tonijnsla, pepers, citroensap, rode ui, kappertjes, cheddar, tomaat" },
+                    { name: "Green Club sandwich", price: 14.00, description: "Groene pesto, avocado, gegrilde courgette, mozzarella, rucola" }
+                ]
+            },
+            "Yoghurt Bowl": {
+                items: [
+                    { name: "Fruity granola yoghurt bowl", price: 9.00, description: "Fruit, granola, yoghurt" }
+                ]
+            },
+            "Pick & Plate": {
+                items: [
+                    { name: "Brood + boter", price: 4.50, description: "Zuurdesembrood met boter als basis" },
+                    { name: "Extra: Zalm", price: 4.50, description: "" },
+                    { name: "Extra: Spek", price: 3.00, description: "" },
+                    { name: "Extra: Ei (2 stuks)", price: 3.00, description: "" },
+                    { name: "Extra: Avocado", price: 3.50, description: "" },
+                    { name: "Extra: Kaas", price: 2.00, description: "" },
+                    { name: "Extra: Confituur", price: 2.00, description: "" },
+                    { name: "Extra: Nutella", price: 2.00, description: "" }
+                ]
+            },
+            "Koffie": {
+                items: [
+                    { name: "Espresso", price: 2.90, description: "" },
+                    { name: "Dubbele espresso", price: 3.50, description: "" },
+                    { name: "Americano", price: 3.00, description: "" },
+                    { name: "Cappuccino", price: 4.00, description: "" },
+                    { name: "Flat white", price: 4.00, description: "" },
+                    { name: "Latte", price: 5.00, description: "" }
+                ]
+            },
+            "Koffie Opties": {
+                items: [
+                    { name: "+ Plantaardige melk", price: 0.50, description: "Haver, kokos of erwten" },
+                    { name: "+ Extra shot espresso", price: 1.00, description: "" },
+                    { name: "+ Extra siroop", price: 0.70, description: "" },
+                    { name: "+ ICED", price: 0.50, description: "" }
+                ]
+            },
+            "Iets Anders": {
+                items: [
+                    { name: "Chai latte", price: 5.00, description: "" },
+                    { name: "Dirty chai latte", price: 5.60, description: "" },
+                    { name: "Matcha latte", price: 5.00, description: "" },
+                    { name: "Strawberry matcha latte", price: 6.00, description: "" }
+                ]
+            },
+            "Thee": {
+                items: [
+                    { name: "Thee", price: 3.00, description: "" },
+                    { name: "Verse munt thee", price: 4.50, description: "" },
+                    { name: "Verse gember thee", price: 4.50, description: "" }
+                ]
+            },
+            "Fris": {
+                items: [
+                    { name: "Plat of bruis water", price: 2.50, description: "" },
+                    { name: "Coca Cola of Zero", price: 2.80, description: "" },
+                    { name: "Ice Tea", price: 2.80, description: "" },
+                    { name: "Nalu", price: 3.50, description: "" },
+                    { name: "San Pellegrino rossa of limonata", price: 3.50, description: "" },
+                    { name: "Vers geperst sinaasappelsap", price: 4.50, description: "" },
+                    { name: "Homemade lemonade", price: 5.00, description: "" }
+                ]
+            },
+            "Bier": {
+                items: [
+                    { name: "Grimbergen blond", price: 4.00, description: "" },
+                    { name: "Duvel", price: 4.50, description: "" },
+                    { name: "Corona", price: 4.00, description: "" },
+                    { name: "Stella", price: 2.80, description: "" },
+                    { name: "Carlsberg 0.0%", price: 3.00, description: "" }
+                ]
+            },
+            "Cocktails": {
+                items: [
+                    { name: "Gin tonic", price: 10.00, description: "" },
+                    { name: "Espresso Martini", price: 12.00, description: "" },
+                    { name: "Aperol Spritz", price: 9.00, description: "" }
+                ]
+            },
+            "Wijnen": {
+                items: [
+                    { name: "Witte wijn", price: 5.00, description: "" },
+                    { name: "Rosé wijn", price: 5.00, description: "" },
+                    { name: "Rode wijn", price: 5.00, description: "" },
+                    { name: "Bubbels", price: 6.00, description: "" }
+                ]
+            }
+        };
+
+        // Logging function
+        function log(message, type = 'info') {
+            const logEl = document.getElementById('log');
+            const time = new Date().toLocaleTimeString();
+            const colorClass = `log-${type}`;
+            logEl.innerHTML += `<p class="${colorClass}">[${time}] ${message}</p>`;
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        // Update progress
+        function updateProgress(current, total) {
+            const percent = Math.round((current / total) * 100);
+            document.getElementById('progress-bar').style.width = `${percent}%`;
+            document.getElementById('progress-text').textContent = `${percent}%`;
+        }
+
+        // Clear all data
+        window.clearAll = async function() {
+            if (!confirm('Êtes-vous sûr de vouloir supprimer TOUTES les données?')) return;
+            
+            const logEl = document.getElementById('log');
+            logEl.innerHTML = '';
+            log('🗑️ Début de la suppression de toutes les données...', 'warning');
+
+            try {
+                const categoriesSnap = await getDocs(collection(db, 'menus'));
+                let totalDeleted = 0;
+
+                for (const catDoc of categoriesSnap.docs) {
+                    const catName = catDoc.id;
+                    log(`Suppression de la catégorie: ${catName}`, 'info');
+                    
+                    // Delete all items in category
+                    const itemsSnap = await getDocs(collection(db, `menus/${catName}/items`));
+                    for (const itemDoc of itemsSnap.docs) {
+                        await deleteDoc(itemDoc.ref);
+                        totalDeleted++;
+                    }
+                    
+                    // Delete category
+                    await deleteDoc(catDoc.ref);
+                }
+
+                log(`✅ Suppression terminée! ${totalDeleted} items supprimés.`, 'success');
+            } catch (error) {
+                log(`❌ Erreur: ${error.message}`, 'error');
+            }
+        };
+
+        // Start import
+        window.startImport = async function() {
+            const logEl = document.getElementById('log');
+            logEl.innerHTML = '';
+            
+            log('🚀 Début de l\'import...', 'info');
+            log(`📦 ${Object.keys(menuData).length} catégories à importer`, 'info');
+
+            // Count total items
+            let totalItems = 0;
+            for (const cat of Object.values(menuData)) {
+                totalItems += cat.items.length;
+            }
+            log(`📝 ${totalItems} items au total`, 'info');
+
+            let importedItems = 0;
+            let importedCategories = 0;
+
+            try {
+                // First, clear existing data
+                log('🗑️ Suppression des données existantes...', 'warning');
+                const existingCats = await getDocs(collection(db, 'menus'));
+                for (const catDoc of existingCats.docs) {
+                    const itemsSnap = await getDocs(collection(db, `menus/${catDoc.id}/items`));
+                    const batch = writeBatch(db);
+                    itemsSnap.forEach(itemDoc => batch.delete(itemDoc.ref));
+                    batch.delete(catDoc.ref);
+                    await batch.commit();
+                }
+                log('✅ Données existantes supprimées', 'success');
+
+                // Import new data
+                for (const [categoryName, categoryData] of Object.entries(menuData)) {
+                    log(`📁 Import catégorie: ${categoryName}`, 'info');
+                    
+                    // Create category document
+                    await setDoc(doc(db, 'menus', categoryName), {
+                        created: new Date(),
+                        order: importedCategories
+                    });
+
+                    // Add items
+                    for (const item of categoryData.items) {
+                        await setDoc(doc(db, `menus/${categoryName}/items`, item.name), {
+                            price: item.price,
+                            description: item.description || ""
+                        });
+                        importedItems++;
+                        updateProgress(importedItems, totalItems);
+                    }
+
+                    importedCategories++;
+                    log(`   ✅ ${categoryData.items.length} items ajoutés`, 'success');
+                }
+
+                log('', 'info');
+                log('═══════════════════════════════════════', 'success');
+                log(`🎉 IMPORT TERMINÉ!`, 'success');
+                log(`   📁 ${importedCategories} catégories`, 'success');
+                log(`   📝 ${importedItems} items`, 'success');
+                log('═══════════════════════════════════════', 'success');
+
+            } catch (error) {
+                log(`❌ Erreur: ${error.message}`, 'error');
+                console.error(error);
+            }
+        };
+
+        // Initialize
+        log('✅ Firebase connecté', 'success');
+        log('📋 Prêt pour l\'import', 'info');
+        log(`   Catégories: ${Object.keys(menuData).length}`, 'info');
+        let total = 0;
+        for (const cat of Object.values(menuData)) total += cat.items.length;
+        log(`   Items: ${total}`, 'info');
+    </script>
+</body>
+</html>
